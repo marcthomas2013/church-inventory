@@ -26,14 +26,14 @@ public class ChurchInventoryApplication {
 
 
             // save a couple of customers
-            Building hall = new Building(1, "Hall");
+            Building hall = new Building(1L, "Hall");
             repository.save(hall);
-            Building church = new Building(2, "Church");
+            Building church = new Building(2L, "Church");
             repository.save(church);
-            Building wayInn = new Building(3, "Way Inn");
+            Building wayInn = new Building(3L, "Way Inn");
             repository.save(wayInn);
 
-            roomRepository.save(new Room(1, "Room 1", wayInn));
+            roomRepository.save(new Room(1L, "Room 1", wayInn));
 
             // fetch all Buildings
             log.info("Buildings found with findAll():");

@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * Created by marc.thomas on 25/04/2016.
+ * Room Entity
+ *
+ * @author marc.thomas
  */
 @Data
 @NoArgsConstructor
@@ -17,7 +19,7 @@ import javax.persistence.*;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String name;
 
