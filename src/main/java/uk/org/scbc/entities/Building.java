@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Buidling Entity
+ * Building Entity
  *
  * @author marc.thomas
  */

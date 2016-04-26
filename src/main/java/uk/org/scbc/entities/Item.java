@@ -27,10 +27,10 @@ public class Item {
     private Float value;
     private Boolean isAsset;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Storage storage;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Organisation organisation;
 
     private String reference;

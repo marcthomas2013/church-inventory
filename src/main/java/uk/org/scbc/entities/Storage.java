@@ -24,7 +24,7 @@ public class Storage {
     private String name;
     private String mainContents;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Room room;
 
     private String notes;

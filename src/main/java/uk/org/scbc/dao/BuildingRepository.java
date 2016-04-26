@@ -8,7 +8,9 @@ import uk.org.scbc.entities.Building;
 import java.util.List;
 
 /**
- * Created by marc.thomas on 25/04/2016.
+ * Building Repository for retrieving and persisting building items.
+ *
+ * @author marc.thomas
  */
 @RepositoryRestResource(collectionResourceRel = "building", path = "building")
 public interface BuildingRepository extends PagingAndSortingRepository<Building, Long> {

@@ -23,6 +23,6 @@ public class Room {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Building building;
 }
