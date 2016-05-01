@@ -8,3 +8,8 @@ Note: Want to see your JavaScript changes automatically? Move into the src/main/
 
 ## Lombok plugin
 This project uses the Lombok plugin to remove the need for getters and setters in the project etc. This requires the Lombok plugin to be added to the IDE, otherwise the code isn't generated and it won't compile.
+
+## Create new entities
+To create new entities using the REST API the organisation, storage etc. fields require the URI to be provided to the entity. So, if that is provided then it will persist the data. e.g. http://localhost:8080/api/storages/1
+
+If you go to http://localhost:8080/api/profile/items for items for example you will see all of the types of the fields that are required.
