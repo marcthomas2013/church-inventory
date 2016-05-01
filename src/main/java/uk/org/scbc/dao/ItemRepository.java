@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author marc.thomas
  */
-@RepositoryRestResource(collectionResourceRel = "item", path = "item")
+@RepositoryRestResource(collectionResourceRel = "items", path = "items")
 public interface ItemRepository extends PagingAndSortingRepository<Item, Long> {
     List<Building> findByName(@Param(value = "name") String name);
 }

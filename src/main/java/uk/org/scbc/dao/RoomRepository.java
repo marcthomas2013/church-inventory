@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author marc.thomas
  */
-@RepositoryRestResource(collectionResourceRel = "room", path = "room")
+@RepositoryRestResource(collectionResourceRel = "rooms", path = "rooms")
 public interface RoomRepository extends PagingAndSortingRepository<Room, Long> {
     List<Building> findByName(@Param(value = "name") String name);
 }

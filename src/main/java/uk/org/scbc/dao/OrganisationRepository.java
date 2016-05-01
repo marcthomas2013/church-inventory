@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Organisation Repository for retrieving and persisting organisation.
  */
-@RepositoryRestResource(collectionResourceRel = "organisation", path = "organisation")
+@RepositoryRestResource(collectionResourceRel = "organisations", path = "organisations")
 public interface OrganisationRepository extends PagingAndSortingRepository<Organisation, Long> {
     List<Building> findByName(@Param(value = "name") String name);
 }
