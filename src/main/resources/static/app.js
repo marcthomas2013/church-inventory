@@ -75,6 +75,11 @@ class ItemList extends React.Component {
                     <th>Item Name</th>
                     <th>Description</th>
                     <th>Notes</th>
+                    <th>Value</th>
+                    <th>Is Asset</th>
+                    <th>Reference</th>
+                    <th>Storage</th>
+                    <th>Organisation</th>
                 </tr>
                 {items}
             </table>
@@ -89,6 +94,11 @@ class Item extends React.Component {
                 <td>{this.props.item.name}</td>
                 <td>{this.props.item.description}</td>
                 <td>{this.props.item.notes}</td>
+                <td>{this.props.item.value}</td>
+                <td>{this.props.item.isAsset}</td>
+                <td>{this.props.item.reference}</td>
+                <td>{this.props.item.storage}</td>
+                <td>{this.props.item.organisation}</td>
             </tr>
         )
     }
