@@ -12,7 +12,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
-        this.state = {items: [], attributes: [], pageSize: 2, links: {}};
+        this.state = {items: [], attributes: [], pageSize: 5, links: {}};
     }
 
     loadFromServer(pageSize) {
