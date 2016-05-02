@@ -2,8 +2,8 @@ const React = require('react');
 const client = require('./client');
 
 const follow = require('./follow'); // function to hop multiple links by "rel"
-const CreateItemDialog = require('./CreateItemDialog');
-const ItemList = require('./ItemList');
+const CreateItemDialog = require('./components/CreateItemDialog');
+const ItemList = require('./components/ItemList');
 
 const root = '/api';
 

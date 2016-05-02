@@ -33,13 +33,13 @@ export default class CreateItemDialog extends React.Component {
 
         return (
             <div>
-                <a href="#createItem">Create</a>
+                <a href="#createItem">Create New Item</a>
 
                 <div id="createItem" className="modalDialog">
                     <div>
                         <a href="#" title="Close" className="close">X</a>
 
-                        <h2>Create new item</h2>
+                        <h2>Create New Item</h2>
 
                         <form>
                             {inputs}
