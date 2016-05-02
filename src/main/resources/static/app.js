@@ -2,6 +2,7 @@ const React = require('react');
 const client = require('./client');
 
 const follow = require('./follow'); // function to hop multiple links by "rel"
+const ItemList = require('./ItemList');
 
 const root = '/api';
 
@@ -60,46 +61,6 @@ class App extends React.Component {
                 <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
                 <ItemList items={this.state.items}/>
             </div>
-        )
-    }
-}
-
-class ItemList extends React.Component {
-    render() {
-        var items = this.props.items.map(item =>
-            <Item key={item._links.self.href} item={item}/>
-        );
-        return (
-            <table>
-                <tr>
-                    <th>Item Name</th>
-                    <th>Description</th>
-                    <th>Notes</th>
-                    <th>Value</th>
-                    <th>Is Asset</th>
-                    <th>Reference</th>
-                    <th>Storage</th>
-                    <th>Organisation</th>
-                </tr>
-                {items}
-            </table>
-        )
-    }
-}
-
-class Item extends React.Component {
-    render() {
-        return (
-            <tr>
-                <td>{this.props.item.name}</td>
-                <td>{this.props.item.description}</td>
-                <td>{this.props.item.notes}</td>
-                <td>{this.props.item.value}</td>
-                <td>{this.props.item.isAsset}</td>
-                <td>{this.props.item.reference}</td>
-                <td>{this.props.item.storage}</td>
-                <td>{this.props.item.organisation}</td>
-            </tr>
         )
     }
 }
