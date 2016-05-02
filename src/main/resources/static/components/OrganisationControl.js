@@ -1,13 +1,31 @@
 const React = require('react');
+const client = require('../client');
 
 export default class OrganisationControl extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {organisationName: ""};
+    }
+
+    componentDidMount() {
+        this.organisationLink = this.props.organisation;
+        this.loadFromServer();
+    }
+
+    loadFromServer() {
+        this.result = client({
+            method: 'GET',
+            path: this.organisationLink
+        }).then(result => {
+            this.setState({organisationName: result.entity.name});
+            return result;
+        });
+    }
 
     render() {
-        var organisation = this.props.organisation;
-
         return (
             <div>
-                <a href={organisation}>{organisation}</a>
+                <a href={this.organisationLink}>{this.state.organisationName}</a>
             </div>
         )
     }
