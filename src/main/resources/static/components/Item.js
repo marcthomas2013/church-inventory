@@ -1,5 +1,6 @@
 const React = require('react');
 const OrganisationControl = require('./OrganisationControl');
+const StorageControl = require('./StorageControl');
 
 export default class Item extends React.Component {
     render() {
@@ -11,7 +12,7 @@ export default class Item extends React.Component {
                 <td>{"" + this.props.item.value}</td>
                 <td>{"" + this.props.item.isAsset}</td>
                 <td>{this.props.item.reference}</td>
-                <td><a href={this.props.item._links.storage.href}>{this.props.item._links.storage.href}</a></td>
+                <td><StorageControl storage={this.props.item._links.storage.href}/></td>
                 <td><OrganisationControl organisation={this.props.item._links.organisation.href}/></td>
             </tr>
         )
