@@ -3,6 +3,7 @@ import OrganisationControl from '../organisation/OrganisationControl';
 import StorageControl from '../storage/StorageControl';
 
 import EditableTextField from '../shared/EditableTextField';
+import EditableBooleanField from '../shared/EditableBooleanField';
 
 export default class ItemRow extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export default class ItemRow extends React.Component {
         this.state = {name: this.props.item.name,
             description: this.props.item.description,
             notes: this.props.item.notes,
-            isAsset: "" + this.props.item.isAsset,
+            isAsset: this.props.item.isAsset,
             value: "" + this.props.item.value,
             reference: this.props.item.reference,
             readOnly: true};
@@ -36,7 +37,7 @@ export default class ItemRow extends React.Component {
                 <td><EditableTextField value={this.state.name} field='name' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
                 <td><EditableTextField value={this.state.description} field='description' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
                 <td><EditableTextField value={this.state.notes} field='notes' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
-                <td><EditableTextField value={this.state.isAsset} field='isAsset' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                <td><EditableBooleanField value={this.state.isAsset} field='isAsset' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
                 <td><EditableTextField value={this.state.value} field='value' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
                 <td><EditableTextField value={this.state.reference} field='reference' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
                 <td><StorageControl storage={this.props.item._links.storage.href}/></td>
