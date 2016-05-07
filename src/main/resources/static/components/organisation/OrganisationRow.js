@@ -15,7 +15,7 @@ export default class Organisation extends React.Component {
         this.setState({readOnly: !this.state.readOnly});
     }
 
-    handleFormSubmit(fieldValue) {
+    handleFormSubmit(fieldValue, fieldName) {
         this.setState({value: fieldValue, readOnly: true});
     }
 
@@ -23,7 +23,7 @@ export default class Organisation extends React.Component {
         return (
             <tr>
                 <td><input type="button" value={this.state.readOnly ? 'Edit' : 'Cancel'} onClick={this.onEditHandler} /></td>
-                <td><EditableTextField value={this.state.value} readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                <td><EditableTextField value={this.state.value} field='organisation' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
             </tr>
         )
     }

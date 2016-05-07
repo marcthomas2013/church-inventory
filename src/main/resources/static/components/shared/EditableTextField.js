@@ -3,7 +3,7 @@ import React from 'react';
 export default class EditableTextField extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: this.props.value, readOnly: this.props.readOnly};
+        this.state = {value: this.props.value, field: this.props.field, readOnly: this.props.readOnly};
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
@@ -13,7 +13,7 @@ export default class EditableTextField extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         var value = this.state.value;
-        this.props.handleFormSubmit(value);
+        this.props.handleFormSubmit(value, this.state.field);
     }
 
     handleTextChange(e) {
