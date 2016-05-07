@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import client from '../../client';
 import follow from '../../follow'; // function to hop multiple links by "rel"
@@ -8,7 +8,7 @@ import ItemList from './ItemList';
 
 const root = '/api';
 
-export default class ItemPage extends React.Component{
+export default class ItemPage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
