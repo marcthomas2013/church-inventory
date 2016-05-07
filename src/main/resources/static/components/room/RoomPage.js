@@ -2,6 +2,9 @@ import React from 'react'
 
 export default React.createClass({
     render() {
-        return <div>Room</div>
+        return (
+            <div>
+                <h2>Rooms</h2>
+            </div>)
     }
 })
