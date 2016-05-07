@@ -6,7 +6,7 @@ export default class EditableBooleanField extends React.Component {
         this.state = {value: this.props.value, field: this.props.field, readOnly: this.props.readOnly};
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleTextChange = this.handleTextChange.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
         this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
     }
 
@@ -16,7 +16,7 @@ export default class EditableBooleanField extends React.Component {
         this.props.handleFormSubmit(value, this.state.field);
     }
 
-    handleTextChange(e) {
+    handleSelectChange(e) {
         this.setState({value: e.target.value});
     }
 
@@ -33,7 +33,7 @@ export default class EditableBooleanField extends React.Component {
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
-                    <select value={this.state.value} onChange={this.handleTextChange}>
+                    <select value={this.state.value} onChange={this.handleSelectChange}>
                         <option value="true">True</option>
                         <option value="false">False</option>
                     </select>
