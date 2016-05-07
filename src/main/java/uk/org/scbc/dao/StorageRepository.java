@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author marc.thomas
  */
-@RepositoryRestResource(collectionResourceRel = "storages", path = "storages")
+@RepositoryRestResource(collectionResourceRel = "storage", path = "storage")
 public interface StorageRepository extends PagingAndSortingRepository<Storage, Long> {
     List<Storage> findByName(@Param(value = "name") String name);
 }
