@@ -1,6 +1,6 @@
 const React = require('react');
 const OrganisationControl = require('./OrganisationControl');
-const StorageControl = require('./StorageControl');
+const StorageControl = require('../storage/StorageControl');
 
 export default class Organisation extends React.Component {
     render() {
