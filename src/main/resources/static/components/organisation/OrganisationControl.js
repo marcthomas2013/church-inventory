@@ -1,5 +1,5 @@
-const React = require('react');
-const client = require('../../client');
+import React from 'react';
+import client from '../../client';
 
 export default class OrganisationControl extends React.Component {
     constructor(props) {

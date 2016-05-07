@@ -1,10 +1,10 @@
 import React from 'react'
 
-const client = require('../../client');
-const follow = require('../../follow'); // function to hop multiple links by "rel"
+import client from '../../client';
+import follow from '../../follow'; // function to hop multiple links by "rel"
 
-const CreateItemDialog = require('./CreateItemDialog');
-const ItemList = require('./ItemList');
+import CreateItemDialog from './CreateItemDialog';
+import ItemList from './ItemList';
 
 const root = '/api';
 

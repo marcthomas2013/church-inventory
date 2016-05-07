@@ -1,11 +1,11 @@
 import { Router, Route, hashHistory } from 'react-router';
 import ReactDOM from 'react-dom';
-const React = require('react');
+import React from 'react';
 
-const OrganisationPage = require('./components/organisation/OrganisationPage');
-const ItemPage = require('./components/item/ItemPage');
-const RoomPage = require('./components/room/RoomPage');
-const StoragePage = require('./components/storage/StoragePage');
+import OrganisationPage from './components/organisation/OrganisationPage';
+import ItemPage from './components/item/ItemPage';
+import RoomPage from './components/room/RoomPage';
+import StoragePage from './components/storage/StoragePage';
 
 class App extends React.Component {
     render() {
@@ -25,4 +25,4 @@ ReactDOM.render((
         <Route path="/items" component={ItemPage}/>
         <Route path="/storage" component={StoragePage}/>
     </Router>
-), document.getElementById('react'))
+), document.getElementById('react'));
