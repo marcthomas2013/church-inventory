@@ -10,6 +10,7 @@ export default class StorageList extends React.Component {
             <table>
                 <tbody>
                 <tr>
+                    <th></th>
                     <th>Storage Names</th>
                 </tr>
                 {storage}
