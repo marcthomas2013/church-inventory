@@ -9,8 +9,8 @@ const ItemPage = require('./components/item/ItemPage');
 const RoomPage = require('./components/room/RoomPage');
 const StoragePage = require('./components/storage/StoragePage');
 
-const CreateItemDialog = require('./components/CreateItemDialog');
-const ItemList = require('./components/ItemList');
+const CreateItemDialog = require('./components/item/CreateItemDialog');
+const ItemList = require('./components/item/ItemList');
 
 const root = '/api';
 
