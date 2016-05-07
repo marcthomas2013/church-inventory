@@ -1,7 +1,12 @@
+import { Router, Route, hashHistory } from 'react-router';
+import ReactDOM from 'react-dom';
 const React = require('react');
 const client = require('./client');
 
 const follow = require('./follow'); // function to hop multiple links by "rel"
+const OrganisationPage = require('./components/organisation/OrganisationPage');
+const RoomPage = require('./components/room/RoomPage');
+
 const CreateItemDialog = require('./components/CreateItemDialog');
 const ItemList = require('./components/ItemList');
 
@@ -66,7 +71,11 @@ class App extends React.Component {
     }
 }
 
-React.render(
-    <App />,
-    document.getElementById('react')
-)
+ReactDOM.render((
+    <Router history={hashHistory}>
+        <Route path="/" component={App}/>
+        <Route path="/room" component={RoomPage}/>
+        <Route path="/organisation" component={OrganisationPage}/>
+        <Route path="/items" component={OrganisationPage}/>
+    </Router>
+), document.getElementById('react'))
