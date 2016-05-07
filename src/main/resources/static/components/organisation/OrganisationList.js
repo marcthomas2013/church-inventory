@@ -10,6 +10,7 @@ export default class OrganisationList extends React.Component {
             <table>
                 <tbody>
                     <tr>
+                        <th></th>
                         <th>Organisation Names</th>
                     </tr>
                     {organisations}

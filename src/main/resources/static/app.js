@@ -7,7 +7,7 @@ import ItemPage from './components/item/ItemPage';
 import RoomPage from './components/room/RoomPage';
 import StoragePage from './components/storage/StoragePage';
 
-import EditableTextField from './EditableTextField';
+import EditableTextField from './components/shared/EditableTextField';
 
 class App extends React.Component {
     constructor(props) {
