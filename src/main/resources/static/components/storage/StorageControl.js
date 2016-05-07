@@ -1,5 +1,5 @@
 const React = require('react');
-const client = require('../client');
+const client = require('../../client');
 
 export default class StorageControl extends React.Component {
     constructor(props) {
