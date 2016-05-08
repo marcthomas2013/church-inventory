@@ -3,9 +3,10 @@ import React from 'react';
 export default class EditableBooleanField extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: this.props.value, field: this.props.field, readOnly: this.props.readOnly};
+        this.state = {originalValue: this.props.value, value: this.props.value, field: this.props.field, readOnly: this.props.readOnly};
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onEditHandler = this.onEditHandler.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
         this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
     }
@@ -20,6 +21,10 @@ export default class EditableBooleanField extends React.Component {
         this.setState({value: e.target.value});
     }
 
+    onEditHandler(e) {
+        this.setState({readOnly: !this.state.readOnly, value: this.state.originalValue});
+    }
+
     // Ensure the state of the component is updated before rendering
     componentWillReceiveProps(nextProps) {
         this.setState({value: nextProps.value, readOnly: nextProps.readOnly});
@@ -28,16 +33,16 @@ export default class EditableBooleanField extends React.Component {
     render() {
         if (this.state.readOnly) {
             return (
-                <div>{"" + this.state.value}</div>
+                <div><input type="button" value="Edit" onClick={this.onEditHandler} /> {"" + this.state.value}</div>
             )
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
-                    <select value={this.state.value} onChange={this.handleSelectChange}>
+                    <input type="button" value="Cancel" onClick={this.onEditHandler} />
+                    <input type="submit" value="Save" /> <select value={this.state.value} onChange={this.handleSelectChange}>
                         <option value="true">True</option>
                         <option value="false">False</option>
                     </select>
-                    <input type="submit" value="Save" />
                 </form>
             )
         }
