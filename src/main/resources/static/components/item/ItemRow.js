@@ -8,7 +8,6 @@ import EditableBooleanField from '../shared/EditableBooleanField';
 export default class ItemRow extends React.Component {
     constructor(props) {
         super(props);
-        this.onEditHandler = this.onEditHandler.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.state = {name: this.props.item.name,
             description: this.props.item.description,
@@ -17,10 +16,6 @@ export default class ItemRow extends React.Component {
             value: "" + this.props.item.value,
             reference: this.props.item.reference,
             readOnly: true};
-    }
-
-    onEditHandler() {
-        this.setState({readOnly: !this.state.readOnly});
     }
 
     handleFormSubmit(fieldValue, fieldName) {
@@ -33,7 +28,6 @@ export default class ItemRow extends React.Component {
     render() {
         return (
             <tr>
-                <td><input type="button" value={this.state.readOnly ? 'Edit' : 'Cancel'} onClick={this.onEditHandler} /></td>
                 <td><EditableTextField value={this.state.name} field='name' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
                 <td><EditableTextField value={this.state.description} field='description' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
                 <td><EditableTextField value={this.state.notes} field='notes' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>

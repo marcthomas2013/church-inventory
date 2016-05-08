@@ -10,7 +10,6 @@ export default class RoomList extends React.Component {
             <table>
                 <tbody>
                 <tr>
-                    <th></th>
                     <th>Room Names</th>
                 </tr>
                 {rooms}

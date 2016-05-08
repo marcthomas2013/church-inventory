@@ -10,7 +10,6 @@ export default class ItemList extends React.Component {
             <table>
                 <tbody>
                     <tr>
-                        <th></th>
                         <th>Item Name</th>
                         <th>Description</th>
                         <th>Notes</th>
