@@ -11,6 +11,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <h1>Church Inventory System</h1>
+                <p class="lead">This system will allow you to find where anything should be stored in the church.<br/>Click on items to see the full list of all items.</p>
             </div>
         )
     }

@@ -7,7 +7,7 @@ export default class ItemList extends React.Component {
             <Item key={item._links.self.href} item={item}/>
         );
         return (
-            <table>
+            <table className="table">
                 <tbody>
                     <tr>
                         <th>Item Name</th>
