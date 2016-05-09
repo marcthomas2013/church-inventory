@@ -35,14 +35,14 @@ export default class EditableTextField extends React.Component {
     render() {
         if (this.state.readOnly) {
             return (
-                <div><input type="button" value="Edit" onClick={this.onEditHandler} /> {this.state.value}
+                <div><input className="btn btn-primary" type="button" value="Edit" onClick={this.onEditHandler} /> {this.state.value}
                 </div>
             )
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
-                    <input type="button" value="Cancel" onClick={this.onEditHandler} />
-                    <input type="submit" value="Save" /> <input type="text"
+                    <input className="btn btn-danger" type="button" value="Cancel" onClick={this.onEditHandler} />
+                    <input className="btn btn-success" type="submit" value="Save" /> <input type="text"
                            placeholder="Your Value"
                            value={this.state.value}
                            onChange={this.handleTextChange}/>

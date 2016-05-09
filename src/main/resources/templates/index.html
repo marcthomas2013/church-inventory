@@ -1,23 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-    <meta charset="UTF-8"/>
-    <title>Church Inventory System</title>
-    <link rel="stylesheet" href="/main.css" />
-</head>
-<body>
+    <head lang="en">
+        <meta charset="UTF-8"/>
+        <title>Church Inventory System</title>
+        <link rel="stylesheet" href="/main.css" />
+        <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    </head>
+    <body>
 
-<H1>Church Inventory System</H1>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Church Inventory System</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="#item">Items</a></li>
+                        <li><a href="#organisation">Organisation</a></li>
+                        <li><a href="#room">Rooms</a></li>
+                        <li><a href="#storage">Storage</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
 
-<a href="/">Home</a> |
-<a href="#item">Items</a> |
-<a href="#organisation">Organisations</a> |
-<a href="#room">Rooms</a> |
-<a href="#storage">Storage</a>
+        <div class="container">
 
-<div id="react"></div>
+            <div class="starter-template">
+                <h1>Church Inventory System</h1>
+                <p class="lead">This system will allow you to find where anything should be stored in the church.<br/>Click on items to see the full list of all items.</p>
+            </div>
 
-<script src="built/bundle.js"></script>
+            <div id="react"></div>
+        </div><!-- /.container -->
 
-</body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="built/bundle.js"></script>
+    </body>
 </html>

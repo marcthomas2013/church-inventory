@@ -11,7 +11,6 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <p>This system will allow you to find where anything should be stored in the church. Click on items to see the full list of all items.</p>
             </div>
         )
     }
