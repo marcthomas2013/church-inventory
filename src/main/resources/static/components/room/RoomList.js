@@ -7,7 +7,7 @@ export default class RoomList extends React.Component {
             <Room key={room._links.self.href} room={room}/>
         );
         return (
-            <table className="table">
+            <table className="table table-striped table-bordered">
                 <tbody>
                 <tr>
                     <th>Room Names</th>

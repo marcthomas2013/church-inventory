@@ -7,7 +7,7 @@ export default class StorageList extends React.Component {
             <Storage key={storage._links.self.href} storage={storage}/>
         );
         return (
-            <table className="table">
+            <table className="table table-striped table-bordered">
                 <tbody>
                 <tr>
                     <th>Storage Names</th>

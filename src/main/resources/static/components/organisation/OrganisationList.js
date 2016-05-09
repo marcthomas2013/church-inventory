@@ -7,7 +7,7 @@ export default class OrganisationList extends React.Component {
             <Organisation key={organisation._links.self.href} organisation={organisation}/>
         );
         return (
-            <table className="table">
+            <table className="table table-striped table-bordered">
                 <tbody>
                     <tr>
                         <th>Organisation Names</th>
