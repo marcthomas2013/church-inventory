@@ -25,7 +25,7 @@ export default class StorageControl extends React.Component {
     render() {
         return (
             <div>
-                <a href={this.storageLink}>{this.state.storageName}</a>
+                <a href="#storage">Create</a> <a href={this.storageLink}>{this.state.storageName}</a>
             </div>
         )
     }

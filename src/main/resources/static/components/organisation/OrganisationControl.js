@@ -25,7 +25,7 @@ export default class OrganisationControl extends React.Component {
     render() {
         return (
             <div>
-                <a href={this.organisationLink}>{this.state.organisationName}</a>
+                <a href="#organisation">Create</a> <a href={this.organisationLink}>{this.state.organisationName}</a>
             </div>
         )
     }
