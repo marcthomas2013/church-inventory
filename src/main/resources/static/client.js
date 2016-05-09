@@ -12,6 +12,11 @@ var registry = baseRegistry.child();
 registry.register('text/uri-list', require('./api/uriListConverter'));
 registry.register('application/hal+json', require('rest/mime/type/application/hal'));
 
+$(".nav li").on("click", function() {
+    $(".nav li").removeClass("active");
+    $(this).addClass("active");
+});
+
 module.exports = rest
     .wrap(mime, { registry: registry })
     .wrap(uriTemplateInterceptor)
