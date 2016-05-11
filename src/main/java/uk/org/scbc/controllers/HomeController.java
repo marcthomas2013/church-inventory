@@ -12,8 +12,6 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public String index(HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-
         return "index";
     }
 
