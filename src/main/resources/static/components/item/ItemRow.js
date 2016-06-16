@@ -8,6 +8,7 @@ import EditableBooleanField from '../shared/EditableBooleanField';
 export default class ItemRow extends React.Component {
     constructor(props) {
         super(props);
+        this.onEditHandler = this.onEditHandler.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.state = {name: this.props.item.name,
             description: this.props.item.description,
@@ -18,6 +19,10 @@ export default class ItemRow extends React.Component {
             readOnly: true};
     }
 
+    onEditHandler() {
+        this.setState({readOnly: !this.state.readOnly});
+    }
+
     handleFormSubmit(fieldValue, fieldName) {
         var stateObject = {};
         stateObject[fieldName] = fieldValue;
@@ -26,17 +31,35 @@ export default class ItemRow extends React.Component {
     }
 
     render() {
-        return (
-            <tr>
-                <td><EditableTextField value={this.state.name} field='name' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
-                <td><EditableTextField value={this.state.description} field='description' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
-                <td><EditableTextField value={this.state.notes} field='notes' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
-                <td><EditableBooleanField value={this.state.isAsset} field='isAsset' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
-                <td><EditableTextField value={this.state.value} field='value' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
-                <td><EditableTextField value={this.state.reference} field='reference' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
-                <td><StorageControl storage={this.props.item._links.storage.href}/></td>
-                <td><OrganisationControl organisation={this.props.item._links.organisation.href}/></td>
-            </tr>
-        )
+        if (this.state.readOnly) {
+            return (
+                <tr>
+                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span></td>
+                    <td><EditableTextField value={this.state.name} field='name' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableTextField value={this.state.description} field='description' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableTextField value={this.state.notes} field='notes' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableBooleanField value={this.state.isAsset} field='isAsset' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableTextField value={this.state.value} field='value' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableTextField value={this.state.reference} field='reference' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><StorageControl storage={this.props.item._links.storage.href}/></td>
+                    <td><OrganisationControl organisation={this.props.item._links.organisation.href}/></td>
+                </tr>
+            )
+        } else {
+            return (
+                <tr>
+                    <td><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onEditHandler}></span>
+                        <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.handleFormSubmit}></span></td>
+                    <td><EditableTextField value={this.state.name} field='name' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableTextField value={this.state.description} field='description' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableTextField value={this.state.notes} field='notes' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableBooleanField value={this.state.isAsset} field='isAsset' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableTextField value={this.state.value} field='value' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><EditableTextField value={this.state.reference} field='reference' readOnly={this.state.readOnly} handleFormSubmit={this.handleFormSubmit} /></td>
+                    <td><StorageControl storage={this.props.item._links.storage.href}/></td>
+                    <td><OrganisationControl organisation={this.props.item._links.organisation.href}/></td>
+                </tr>
+            )
+        }
     }
 }

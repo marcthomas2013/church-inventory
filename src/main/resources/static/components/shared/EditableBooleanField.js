@@ -33,18 +33,18 @@ export default class EditableBooleanField extends React.Component {
     render() {
         if (this.state.readOnly) {
             return (
-                <div><input className="btn btn-primary btn-xs" type="button" value="Edit" onClick={this.onEditHandler} /> {"" + this.state.value}</div>
+                <div>{"" + this.state.value}</div>
             )
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
-                    <input className="btn btn-danger btn-xs" type="button" value="Cancel" onClick={this.onEditHandler} />
-                    <input className="btn btn-success btn-xs" type="submit" value="Save" /> <select value={this.state.value}
+                    <select value={this.state.value}
                                                                                                     className="form-control"
                                                                                                     onChange={this.handleSelectChange}>
                         <option value="true">True</option>
                         <option value="false">False</option>
                     </select>
+                    <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.handleSubmit}></span>
                 </form>
             )
         }

@@ -10,6 +10,7 @@ export default class StorageList extends React.Component {
             <table className="table table-striped table-bordered">
                 <tbody>
                 <tr>
+                    <th></th>
                     <th>Storage Names</th>
                 </tr>
                 {storage}

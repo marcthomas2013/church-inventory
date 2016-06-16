@@ -9,17 +9,18 @@ export default class ItemList extends React.Component {
         return (
             <table className="table table-striped table-bordered">
                 <tbody>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Description</th>
-                        <th>Notes</th>
-                        <th>Is Asset</th>
-                        <th>Value</th>
-                        <th>Reference</th>
-                        <th>Storage</th>
-                        <th>Organisation</th>
-                    </tr>
-                    {items}
+                <tr>
+                    <th></th>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Notes</th>
+                    <th>Is Asset</th>
+                    <th>Value</th>
+                    <th>Reference</th>
+                    <th>Storage</th>
+                    <th>Organisation</th>
+                </tr>
+                {items}
                 </tbody>
             </table>
         )

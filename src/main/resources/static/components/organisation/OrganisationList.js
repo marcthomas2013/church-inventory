@@ -9,10 +9,11 @@ export default class OrganisationList extends React.Component {
         return (
             <table className="table table-striped table-bordered">
                 <tbody>
-                    <tr>
-                        <th>Organisation Names</th>
-                    </tr>
-                    {organisations}
+                <tr>
+                    <th></th>
+                    <th>Organisation Names</th>
+                </tr>
+                {organisations}
                 </tbody>
             </table>
         )

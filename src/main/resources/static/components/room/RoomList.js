@@ -10,6 +10,7 @@ export default class RoomList extends React.Component {
             <table className="table table-striped table-bordered">
                 <tbody>
                 <tr>
+                    <th></th>
                     <th>Room Names</th>
                 </tr>
                 {rooms}
