@@ -5,24 +5,13 @@ export default class EditableBooleanField extends React.Component {
         super(props);
         this.state = {originalValue: this.props.value, value: this.props.value, field: this.props.field, readOnly: this.props.readOnly};
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.onEditHandler = this.onEditHandler.bind(this);
-        this.handleSelectChange = this.handleSelectChange.bind(this);
+        this.onChangeHandler = this.onChangeHandler.bind(this);
         this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
     }
 
-    handleSubmit(e) {
+    onChangeHandler(e) {
         e.preventDefault();
-        var value = this.state.value;
-        this.props.handleFormSubmit(value, this.state.field);
-    }
-
-    handleSelectChange(e) {
-        this.setState({value: e.target.value});
-    }
-
-    onEditHandler(e) {
-        this.setState({readOnly: !this.state.readOnly, value: this.state.originalValue});
+        this.props.onChangeHandler(e.target.value, this.state.field);
     }
 
     // Ensure the state of the component is updated before rendering
@@ -37,15 +26,14 @@ export default class EditableBooleanField extends React.Component {
             )
         } else {
             return (
-                <form onSubmit={this.handleSubmit}>
+                <div>
                     <select value={this.state.value}
                                                                                                     className="form-control"
-                                                                                                    onChange={this.handleSelectChange}>
+                                                                                                    onChange={this.onChangeHandler}>
                         <option value="true">True</option>
                         <option value="false">False</option>
                     </select>
-                    <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.handleSubmit}></span>
-                </form>
+                </div>
             )
         }
 
