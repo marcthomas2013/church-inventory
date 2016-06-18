@@ -21,9 +21,11 @@ export default class EditableBooleanField extends React.Component {
 
     render() {
         if (this.state.readOnly) {
-            return (
-                <div>{"" + this.state.value}</div>
-            )
+            if(this.state.value) {
+                return (<div className="glyphicon glyphicon-ok" aria-hidden="true"></div>)
+            } else {
+                return (<div className="glyphicon glyphicon-remove" aria-hidden="true"></div>)
+            }
         } else {
             return (
                 <div>
