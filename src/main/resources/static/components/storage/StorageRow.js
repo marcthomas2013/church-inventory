@@ -1,5 +1,7 @@
 import React from 'react';
 import StorageControl from './StorageControl';
+import RoomControl from './../room/RoomControl';
+import BuildingControl from './../building/BuildingControl';
 
 import EditableTextField from '../shared/EditableTextField';
 
@@ -35,6 +37,8 @@ export default class Storage extends React.Component {
                 <tr>
                     <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span></td>
                     <td><EditableTextField value={this.state.originalValue} field='storage' readOnly={this.state.readOnly} /></td>
+                    <td><RoomControl room={this.props.storage._links.room.href}/></td>
+                    <td>TODO</td>
                 </tr>
             )
         } else {
@@ -43,6 +47,8 @@ export default class Storage extends React.Component {
                     <td><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
                         <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
                     <td><EditableTextField value={this.state.newValue} field='storage' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
+                    <td><RoomControl room={this.props.storage._links.room.href}/></td>
+                    <td>TODO</td>
                 </tr>
             )
         }

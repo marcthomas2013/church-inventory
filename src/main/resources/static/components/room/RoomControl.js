@@ -8,7 +8,7 @@ export default class RoomControl extends React.Component {
     }
 
     componentDidMount() {
-        this.roomLink = this.props.organisation;
+        this.roomLink = this.props.room;
         this.loadFromServer();
     }
 
