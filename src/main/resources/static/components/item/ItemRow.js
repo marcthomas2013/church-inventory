@@ -63,8 +63,8 @@ export default class ItemRow extends React.Component {
                     <td><EditableTextField value={this.state.originalDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.originalNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableBooleanField value={this.state.originalIsAsset} field='IsAsset' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><EditableTextField value={this.state.originalValue} field='Value' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><EditableTextField value={this.state.originalReference} field='Reference' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
+                    <td><EditableTextField value={this.state.originalValue} field='Value' readOnly={this.state.readOnly} visible={this.state.originalIsAsset} onChangeHandler={this.onChangeHandler} /></td>
+                    <td><EditableTextField value={this.state.originalReference} field='Reference' readOnly={this.state.readOnly} visible={this.state.originalIsAsset} onChangeHandler={this.onChangeHandler} /></td>
                     <td><StorageControl storage={this.props.item._links.storage.href}/></td>
                     <td><OrganisationControl organisation={this.props.item._links.organisation.href}/></td>
                 </tr>
@@ -78,8 +78,8 @@ export default class ItemRow extends React.Component {
                     <td><EditableTextField value={this.state.newDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.newNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableBooleanField value={this.state.newIsAsset} field='IsAsset' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><EditableTextField value={this.state.newValue} field='Value' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><EditableTextField value={this.state.reference} field='Reference' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
+                    <td><EditableTextField value={this.state.newValue} field='Value' readOnly={this.state.readOnly} visible={this.state.newIsAsset} onChangeHandler={this.onChangeHandler} /></td>
+                    <td><EditableTextField value={this.state.newReference} field='Reference' readOnly={this.state.readOnly} visible={this.state.newIsAsset} onChangeHandler={this.onChangeHandler} /></td>
                     <td><StorageControl storage={this.props.item._links.storage.href}/></td>
                     <td><OrganisationControl organisation={this.props.item._links.organisation.href}/></td>
                 </tr>

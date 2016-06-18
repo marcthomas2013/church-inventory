@@ -11,7 +11,7 @@ export default class EditableBooleanField extends React.Component {
 
     onChangeHandler(e) {
         e.preventDefault();
-        this.props.onChangeHandler(e.target.value, this.state.field);
+        this.props.onChangeHandler(e.target.value === 'true', this.state.field);
     }
 
     // Ensure the state of the component is updated before rendering
