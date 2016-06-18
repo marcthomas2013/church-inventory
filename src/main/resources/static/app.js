@@ -6,6 +6,7 @@ import OrganisationPage from './components/organisation/OrganisationPage';
 import ItemPage from './components/item/ItemPage';
 import RoomPage from './components/room/RoomPage';
 import StoragePage from './components/storage/StoragePage';
+import BuildingPage from './components/building/BuildingPage';
 
 class App extends React.Component {
     render() {
@@ -26,5 +27,6 @@ ReactDOM.render((
         <Route path="/organisation" component={OrganisationPage}/>
         <Route path="/items" component={ItemPage}/>
         <Route path="/storage" component={StoragePage}/>
+        <Route path="/building" component={BuildingPage}/>
     </Router>
 ), document.getElementById('react'));
