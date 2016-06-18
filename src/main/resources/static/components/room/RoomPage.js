@@ -11,7 +11,7 @@ export default class RoomPage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
-        this.state = {rooms: [], attributes: [], pageSize: 10, links: {}};
+        this.state = {rooms: [], attributes: [], pageSize: 100, links: {}};
     }
 
     loadFromServer(pageSize) {

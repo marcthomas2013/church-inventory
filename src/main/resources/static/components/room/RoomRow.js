@@ -1,5 +1,6 @@
 import React from 'react';
 import RoomControl from './RoomControl';
+import BuildingControl from './../building/BuildingControl';
 
 import EditableTextField from '../shared/EditableTextField';
 
@@ -35,6 +36,7 @@ export default class Room extends React.Component {
                 <tr>
                     <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span></td>
                     <td><EditableTextField value={this.state.originalValue} field='room' readOnly={this.state.readOnly} /></td>
+                    <td><BuildingControl building={this.props.room._links.building.href}/></td>
                 </tr>
             )
         } else {
@@ -43,6 +45,7 @@ export default class Room extends React.Component {
                     <td><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
                         <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
                     <td><EditableTextField value={this.state.newValue} field='room' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
+                    <td><BuildingControl building={this.props.room._links.building.href}/></td>
                 </tr>
             )
         }

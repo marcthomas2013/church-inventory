@@ -12,6 +12,7 @@ export default class RoomList extends React.Component {
                 <tr>
                     <th></th>
                     <th>Room Names</th>
+                    <th>Building Names</th>
                 </tr>
                 {rooms}
                 </tbody>

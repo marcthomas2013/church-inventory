@@ -25,7 +25,7 @@ export default class RoomControl extends React.Component {
     render() {
         return (
             <div>
-                <a href={this.roomLink}>{this.state.roomName}</a>
+                <a href="#room">{this.state.roomName}</a>
             </div>
         )
     }
