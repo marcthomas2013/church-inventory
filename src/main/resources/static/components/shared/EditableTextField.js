@@ -27,10 +27,12 @@ export default class EditableTextField extends React.Component {
         } else {
             if (this.state.visible) {
                 return (<div>
-                    <input type="text"
-                           placeholder="Your Value"
-                           value={this.state.value}
-                           onChange={this.onChangeHandler}/>
+                    <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Your Value"
+                        value={this.state.value}
+                        onChange={this.onChangeHandler}/>
                 </div>)
             } else {
                 return (<div>N/A</div>)

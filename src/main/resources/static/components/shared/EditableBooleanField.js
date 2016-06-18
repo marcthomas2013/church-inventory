@@ -30,8 +30,8 @@ export default class EditableBooleanField extends React.Component {
             return (
                 <div>
                     <select value={this.state.value}
-                                                                                                    className="form-control"
-                                                                                                    onChange={this.onChangeHandler}>
+                            className="form-control"
+                            onChange={this.onChangeHandler}>
                         <option value="true">True</option>
                         <option value="false">False</option>
                     </select>
