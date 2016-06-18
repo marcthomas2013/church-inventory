@@ -26,7 +26,7 @@ export default class Room extends React.Component {
         this.setState({newValue: fieldValue});
     }
 
-    onSuccessHandler(e) {
+    onSuccessHandler() {
         this.setState({originalValue: this.state.newValue, newValue: this.state.newValue, readOnly: true});
     }
 
