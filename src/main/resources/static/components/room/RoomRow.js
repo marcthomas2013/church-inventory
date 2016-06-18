@@ -4,6 +4,9 @@ import BuildingControl from './../building/BuildingControl';
 
 import EditableTextField from '../shared/EditableTextField';
 
+import client from '../../client';
+import createAlert from '../../alerts';
+
 export default class Room extends React.Component {
     constructor(props) {
         super(props);
@@ -28,6 +31,24 @@ export default class Room extends React.Component {
 
     onSuccessHandler() {
         this.setState({originalValue: this.state.newValue, newValue: this.state.newValue, readOnly: true});
+        this.onUpdate(this.props.room._links.self, {"name": this.state.newValue});
+    }
+
+    onUpdate(self, newRoom) {
+        client({
+            method: 'PUT',
+            path: self.href,
+            entity: newRoom,
+            headers: {'Content-Type': 'application/json'}
+        }).then(function(response) {
+            createAlert('<strong>Success</strong> - Changes have been saved successfuly', 'alert-success');
+
+            console.log('Success: ' + response);
+        }, function(response) {
+            createAlert('<strong>Oh snap!</strong> - Could not save the changes, please try again', 'alert-danger');
+
+            console.log('Failed: ' + response);
+        });
     }
 
     render() {
