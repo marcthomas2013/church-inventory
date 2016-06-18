@@ -5,6 +5,9 @@ import StorageControl from '../storage/StorageControl';
 import EditableTextField from '../shared/EditableTextField';
 import EditableBooleanField from '../shared/EditableBooleanField';
 
+import client from '../../client';
+import createAlert from '../../alerts';
+
 export default class ItemRow extends React.Component {
     constructor(props) {
         super(props);
@@ -51,7 +54,32 @@ export default class ItemRow extends React.Component {
             originalValue: "" + this.state.newValue, newValue: "" + this.state.newValue,
             originalReference: this.state.newReference, newReference: this.state.newReference,
             readOnly: true});
+        this.onUpdate(this.props.item._links.self,
+            {
+                "name": this.state.newName,
+                "description": this.state.newDescription,
+                "notes": this.state.newNotes,
+                "value": this.state.newValue,
+                "isAsset": this.state.newIsAsset,
+                "reference": this.state.newReference
+            });
+    }
 
+    onUpdate(self, item) {
+        client({
+            method: 'PUT',
+            path: self.href,
+            entity: item,
+            headers: {'Content-Type': 'application/json'}
+        }).then(function(response) {
+            createAlert('<strong>Success</strong> - Changes have been saved successfuly', 'alert-success');
+
+            console.log('Success: ' + response);
+        }, function(response) {
+            createAlert('<strong>Oh snap!</strong> - Could not save the changes, please try again', 'alert-danger');
+
+            console.log('Failed: ' + response);
+        });
     }
 
     render() {
