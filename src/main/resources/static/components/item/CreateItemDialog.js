@@ -61,10 +61,11 @@ export default class CreateItemDialog extends React.Component {
                                         </div>
                                     </div>
 
-                                    <div className="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Is Asset </input>
-                                        </label>
+                                    <div className="form-group">
+                                        <label className="col-sm-2 control-label">Is Asset</label>
+                                        <div className="col-sm-10">
+                                            <input className="form-control" type="checkbox" />
+                                        </div>
                                     </div>
 
                                     <div className="form-group">
