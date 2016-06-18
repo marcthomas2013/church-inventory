@@ -25,7 +25,7 @@ export default class BuildingControl extends React.Component {
     render() {
         return (
             <div>
-                <a href="#building">Create</a> <a href={this.buildingLink}>{this.state.buildingName}</a>
+                <a href="#building">{this.state.buildingName}</a>
             </div>
         )
     }
