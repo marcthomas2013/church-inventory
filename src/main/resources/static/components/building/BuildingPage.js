@@ -11,7 +11,7 @@ export default class BuildingPage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
-        this.state = {buildings: [], attributes: [], pageSize: 10, links: {}};
+        this.state = {buildings: [], attributes: [], pageSize: 100, links: {}};
     }
 
     loadFromServer(pageSize) {

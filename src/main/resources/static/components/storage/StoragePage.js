@@ -11,7 +11,7 @@ export default class StoragePage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
-        this.state = {storage: [], attributes: [], pageSize: 10, links: {}};
+        this.state = {storage: [], attributes: [], pageSize: 100, links: {}};
     }
 
     loadFromServer(pageSize) {

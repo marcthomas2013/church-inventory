@@ -11,7 +11,7 @@ export default class OrganisationPage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
-        this.state = {organisations: [], attributes: [], pageSize: 10, links: {}};
+        this.state = {organisations: [], attributes: [], pageSize: 100, links: {}};
     }
 
     loadFromServer(pageSize) {
