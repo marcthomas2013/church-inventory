@@ -1,13 +1,83 @@
 import React from 'react';
 
+import client from '../../client';
+import createAlert from '../../alerts';
+
 export default class CreateItemDialog extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.onCreate = this.onCreate.bind(this);
+        this.onChangeNameHandler = this.onChangeNameHandler.bind(this);
+        this.onChangeDescriptionHandler = this.onChangeDescriptionHandler.bind(this);
+        this.onChangeNotesHandler = this.onChangeNotesHandler.bind(this);
+        this.onChangeIsAssetHandler = this.onChangeIsAssetHandler.bind(this);
+        this.onChangeValueHandler = this.onChangeValueHandler.bind(this);
+        this.onChangeReferenceHandler = this.onChangeReferenceHandler.bind(this);
+        this.state = {name: "", description: "", notes: "", isAsset: false, value: "", reference: ""};
     }
 
     showModal() {
         $('#createItem').modal();
+    }
+
+    onChangeNameHandler(e) {
+        e.preventDefault();
+        this.setState({"name": e.target.value});
+    }
+
+    onChangeDescriptionHandler(e) {
+        e.preventDefault();
+        this.setState({"description": e.target.value});
+    }
+
+    onChangeNotesHandler(e) {
+        e.preventDefault();
+        this.setState({"notes": e.target.value});
+    }
+
+    onChangeIsAssetHandler(e) {
+        e.preventDefault();
+        this.setState({"isAsset": e.target.value});
+    }
+
+    onChangeValueHandler(e) {
+        e.preventDefault();
+        this.setState({"value": e.target.value});
+    }
+
+    onChangeReferenceHandler(e) {
+        e.preventDefault();
+        this.setState({"reference": e.target.value});
+    }
+
+    onCreate() {
+        var item = {
+            "name": this.state.name,
+            "description": this.state.description,
+            "notes": this.state.notes,
+            "value": this.state.value,
+            "isAsset": (this.state.isAsset === "on"),
+            "reference": this.state.reference
+        };
+
+        client({
+            method: 'POST',
+            path: this.props.self,
+            entity: item,
+            headers: {'Content-Type': 'application/json'}
+        }).then(function(response) {
+            createAlert('<strong>Success</strong> - Changes have been saved successfuly', 'alert-success');
+
+            console.log('Success: ' + response);
+
+            $('#createItem').modal('hide');
+        }, function(response) {
+            createAlert('<strong>Oh snap!</strong> - Could not save the changes, please try again', 'alert-danger');
+
+            console.log('Failed: ' + response);
+        });
     }
 
     render() {
@@ -25,14 +95,15 @@ export default class CreateItemDialog extends React.Component {
                             </div>
 
                             <div className="modal-body">
-                                <form className="form-horizontal">
+                                <form className="form-horizontal" onsubmit="">
                                     <div className="form-group">
-                                        <label for="name" className="col-sm-2 control-label">Name</label>
+                                        <label className="col-sm-2 control-label">Name</label>
                                         <div className="col-sm-10">
                                             <input id="name"
                                                 className="form-control"
                                                 type="text"
-                                                placeholder="Please enter an item name" />
+                                                placeholder="Please enter an item name"
+                                                   onChange={this.onChangeNameHandler}/>
                                         </div>
                                     </div>
 
@@ -43,7 +114,8 @@ export default class CreateItemDialog extends React.Component {
                                                 className="form-control"
                                                 type="textarea"
                                                 rows="3"
-                                                placeholder="Please enter an item description" />
+                                                placeholder="Please enter an item description"
+                                                onChange={this.onChangeDescriptionHandler}/>
                                         </div>
                                     </div>
 
@@ -54,14 +126,15 @@ export default class CreateItemDialog extends React.Component {
                                                 className="form-control"
                                                 type="textarea"
                                                 rows="3"
-                                                placeholder="Please enter item notes" />
+                                                placeholder="Please enter item notes"
+                                                onChange={this.onChangeNotesHandler}/>
                                         </div>
                                     </div>
 
                                     <div className="form-group">
                                         <label className="col-sm-2 control-label">Is Asset</label>
                                         <div className="col-sm-10">
-                                            <input className="form-control" type="checkbox" />
+                                            <input className="form-control" type="checkbox" onChange={this.onChangeIsAssetHandler}/>
                                         </div>
                                     </div>
 
@@ -71,7 +144,7 @@ export default class CreateItemDialog extends React.Component {
                                             <input
                                                 className="form-control"
                                                 type="number"
-                                                placeholder="Please enter item value" />
+                                                placeholder="Please enter item value" onChange={this.onChangeValueHandler}/>
                                         </div>
                                     </div>
 
@@ -81,7 +154,7 @@ export default class CreateItemDialog extends React.Component {
                                             <input
                                                 className="form-control"
                                                 type="text"
-                                                placeholder="Please enter item asset reference" />
+                                                placeholder="Please enter item asset reference" onChange={this.onChangeReferenceHandler}/>
                                         </div>
                                     </div>
                                 </form>
@@ -89,7 +162,7 @@ export default class CreateItemDialog extends React.Component {
 
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-primary">Save changes</button>
+                                <button type="button" className="btn btn-primary" onClick={this.onCreate}>Save changes</button>
                             </div>
                         </div>
                     </div>

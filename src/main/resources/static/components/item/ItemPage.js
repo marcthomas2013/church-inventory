@@ -6,13 +6,15 @@ import follow from '../../follow'; // function to hop multiple links by "rel"
 import CreateItemDialog from './CreateItemDialog';
 import ItemList from './ItemList';
 
+import createAlert from '../../alerts';
+
 const root = '/api';
 
 export default class ItemPage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
-        this.state = {items: [], attributes: [], pageSize: 5, links: {}};
+        this.state = {items: [], attributes: [], pageSize: 100, links: {}};
     }
 
     loadFromServer(pageSize) {
@@ -36,36 +38,29 @@ export default class ItemPage extends React.Component {
         });
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.loadFromServer(this.state.pageSize);
     }
 
     onCreate(newItem) {
-        follow(client, root, ['items']).then(itemCollection => {
-            return client({
-                method: 'POST',
-                path: itemCollection.entity._links.self.href,
-                entity: newItem,
-                headers: {'Content-Type': 'application/json'}
-            })
-        }).then(response => {
-            return follow(client, root, [
-                {rel: 'items', params: {'size': this.state.pageSize}}]);
-        }).done(response => {
-            this.onNavigate(response.entity._links.last.href);
-        });
+
     }
 
     render() {
-        return (
-            <div>
-                <h2>Items</h2>
-
+        if (this.state.links.self !== undefined) {
+            return (
                 <div>
-                    <CreateItemDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
-                    <br/>
-                    <ItemList items={this.state.items}/>
-                </div>
-            </div>)
+                    <h2>Items</h2>
+
+                    <div>
+                        <CreateItemDialog attributes={this.state.attributes} self={this.state.links.self.href}
+                                          onCreateUpdate={this.onCreate}/>
+                        <br/>
+                        <ItemList items={this.state.items}/>
+                    </div>
+                </div>);
+        } else {
+            return (<div></div>);
+        }
     }
 }
