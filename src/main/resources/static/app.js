@@ -21,7 +21,7 @@ class App extends React.Component {
 
 ReactDOM.render((
     <Router history={hashHistory}>
-        <Route path="/" component={App}/>
+        <Route path="/" component={ItemPage}/>
         <Route path="/item" component={ItemPage}/>
         <Route path="/room" component={RoomPage}/>
         <Route path="/organisation" component={OrganisationPage}/>
