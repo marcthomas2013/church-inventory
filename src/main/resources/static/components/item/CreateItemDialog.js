@@ -22,9 +22,6 @@ export default class CreateItemDialog extends React.Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h4 className="modal-title">Create a new item</h4>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
                             </div>
 
                             <div className="modal-body">
