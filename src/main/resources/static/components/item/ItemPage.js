@@ -63,6 +63,7 @@ export default class ItemPage extends React.Component {
 
                 <div>
                     <CreateItemDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
+                    <br/>
                     <ItemList items={this.state.items}/>
                 </div>
             </div>)
