@@ -3,6 +3,7 @@ import OrganisationControl from '../organisation/OrganisationControl';
 import StorageControl from '../storage/StorageControl';
 
 import EditableTextField from '../shared/EditableTextField';
+import EditableTextArea from '../shared/EditableTextArea';
 import EditableBooleanField from '../shared/EditableBooleanField';
 
 import client from '../../client';
@@ -88,8 +89,8 @@ export default class ItemRow extends React.Component {
                 <tr>
                     <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span></td>
                     <td><EditableTextField value={this.state.originalName} field='Name' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><EditableTextField value={this.state.originalDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><EditableTextField value={this.state.originalNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
+                    <td><EditableTextArea value={this.state.originalDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
+                    <td><EditableTextArea value={this.state.originalNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableBooleanField value={this.state.originalIsAsset} field='IsAsset' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.originalValue} field='Value' readOnly={this.state.readOnly} visible={this.state.originalIsAsset} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.originalReference} field='Reference' readOnly={this.state.readOnly} visible={this.state.originalIsAsset} onChangeHandler={this.onChangeHandler} /></td>
@@ -103,8 +104,8 @@ export default class ItemRow extends React.Component {
                     <td><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
                         <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
                     <td><EditableTextField value={this.state.newName} field='Name' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><EditableTextField value={this.state.newDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><EditableTextField value={this.state.newNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
+                    <td><EditableTextArea value={this.state.newDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
+                    <td><EditableTextArea value={this.state.newNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableBooleanField value={this.state.newIsAsset} field='IsAsset' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.newValue} field='Value' readOnly={this.state.readOnly} visible={this.state.newIsAsset} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.newReference} field='Reference' readOnly={this.state.readOnly} visible={this.state.newIsAsset} onChangeHandler={this.onChangeHandler} /></td>
