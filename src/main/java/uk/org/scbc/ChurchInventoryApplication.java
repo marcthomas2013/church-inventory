@@ -7,10 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import uk.org.scbc.dao.BuildingRepository;
-import uk.org.scbc.dao.ItemRepository;
-import uk.org.scbc.dao.OrganisationRepository;
-import uk.org.scbc.dao.RoomRepository;
+import uk.org.scbc.dao.*;
 import uk.org.scbc.entities.*;
 
 @SpringBootApplication
@@ -22,7 +19,7 @@ public class ChurchInventoryApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(OrganisationRepository organisationRepository, BuildingRepository repository, RoomRepository roomRepository, ItemRepository itemRepository) {
+    public CommandLineRunner demo(StorageRepository storageRepository, OrganisationRepository organisationRepository, BuildingRepository repository, RoomRepository roomRepository, ItemRepository itemRepository) {
         return (args) -> {
             // save a couple of customers
             Building hall = new Building(1L, "Hall");
@@ -31,24 +28,28 @@ public class ChurchInventoryApplication {
 
             Room newRoom = new Room(1L, "Hall", hall);
             roomRepository.save(newRoom);
+            Room newRoom2 = new Room(2L, "G1", hall);
+            roomRepository.save(newRoom2);
 
             repository.save(hall);
             repository.save(church);
             repository.save(wayInn);
 
             Storage storage = new Storage(1L, "AV Cupboard", "AV Equipment", newRoom, "Details on storage");
+            Storage storage2 = new Storage(2L, "Busy Bees Cupboard", "Busy Bees Cupboard", newRoom2, "Details on storage");
+            storageRepository.save(storage);
+            storageRepository.save(storage2);
+
             Organisation boysBrigade = new Organisation(1L, "Boys Brigade");
             Organisation girlsBrigade = new Organisation(2L, "Girls Brigade");
             organisationRepository.save(boysBrigade);
             organisationRepository.save(girlsBrigade);
 
             Item plasticGoals = new Item(1L, "Plastic Goals", "Red Plastic Goals", "Some notes on the goals", 1.0f, false, storage, boysBrigade, "");
-            Item tableTennisTable = new Item(2L, "Table Tennis Table", "Table Tennis Table", "Some notes on the tables", 1.0f, true, storage, boysBrigade, "");
-            itemRepository.save(tableTennisTable);
+            Item tableTennisTable = new Item(2L, "Table Tennis Table", "Table Tennis Table", "Some notes on the tables", 1.0f, true, storage2, girlsBrigade, "");
             itemRepository.save(plasticGoals);
+            itemRepository.save(tableTennisTable);
 
-            newRoom = new Room(2L, "G1", hall);
-            roomRepository.save(newRoom);
             newRoom = new Room(3L, "G2", hall);
             roomRepository.save(newRoom);
             newRoom = new Room(4L, "G3", hall);
