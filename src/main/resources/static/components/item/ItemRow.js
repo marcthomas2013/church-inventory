@@ -23,6 +23,8 @@ export default class ItemRow extends React.Component {
             originalIsAsset: this.props.item.isAsset, newIsAsset: this.props.item.isAsset,
             originalValue: "" + this.props.item.value, newValue: "" + this.props.item.value,
             originalReference: this.props.item.reference, newReference: this.props.item.reference,
+            originalStorage: this.props.item._links.storage.href, newStorage: this.props.item._links.storage.href,
+            originalOrganisation: this.props.item._links.organisation.href, newOrganisation: this.props.item._links.organisation.href,
             readOnly: true};
     }
 
@@ -33,6 +35,8 @@ export default class ItemRow extends React.Component {
             originalIsAsset: this.state.originalIsAsset, newIsAsset: this.state.originalIsAsset,
             originalValue: "" + this.state.originalValue, newValue: "" + this.state.originalValue,
             originalReference: this.state.originalReference, newReference: this.state.originalReference,
+            originalStorage: this.state.originalStorage, newStorage: this.state.originalStorage,
+            originalOrganisation: this.state.originalOrganisation, newOrganisation: this.state.originalOrganisation,
             readOnly: true});
     }
 
@@ -54,6 +58,8 @@ export default class ItemRow extends React.Component {
             originalIsAsset: this.state.newIsAsset, newIsAsset: this.state.newIsAsset,
             originalValue: "" + this.state.newValue, newValue: "" + this.state.newValue,
             originalReference: this.state.newReference, newReference: this.state.newReference,
+            originalStorage: this.state.newStorage, newStorage: this.state.newStorage,
+            originalOrganisation: this.state.newOrganisation, newOrganisation: this.state.newOrganisation,
             readOnly: true});
         this.onUpdate(this.props.item._links.self,
             {
@@ -94,8 +100,8 @@ export default class ItemRow extends React.Component {
                     <td><EditableBooleanField value={this.state.originalIsAsset} field='IsAsset' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.originalValue} field='Value' readOnly={this.state.readOnly} visible={this.state.originalIsAsset} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.originalReference} field='Reference' readOnly={this.state.readOnly} visible={this.state.originalIsAsset} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><StorageControl storage={this.props.item._links.storage.href}/></td>
-                    <td><OrganisationControl organisation={this.props.item._links.organisation.href}/></td>
+                    <td><StorageControl self={this.state.originalStorage} field='Storage' storage={this.props.storage} readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
+                    <td><OrganisationControl self={this.state.originalOrganisation} field='Organisation' organisations={this.props.organisations} readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
                 </tr>
             )
         } else {
@@ -109,8 +115,8 @@ export default class ItemRow extends React.Component {
                     <td><EditableBooleanField value={this.state.newIsAsset} field='IsAsset' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.newValue} field='Value' readOnly={this.state.readOnly} visible={this.state.newIsAsset} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextField value={this.state.newReference} field='Reference' readOnly={this.state.readOnly} visible={this.state.newIsAsset} onChangeHandler={this.onChangeHandler} /></td>
-                    <td><StorageControl storage={this.props.item._links.storage.href}/></td>
-                    <td><OrganisationControl organisation={this.props.item._links.organisation.href}/></td>
+                    <td><StorageControl self={this.state.newStorage} field='Storage' storage={this.props.storage} readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
+                    <td><OrganisationControl self={this.state.newOrganisation} field='Organisation' organisations={this.props.organisations} readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
                 </tr>
             )
         }

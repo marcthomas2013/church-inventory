@@ -14,7 +14,7 @@ export default class ItemPage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
-        this.state = {items: [], attributes: [], pageSize: 100, links: {}};
+        this.state = {items: undefined, storage: undefined, organisations: undefined, attributes: [], pageSize: 100, links: {}};
     }
 
     loadFromServer(pageSize) {
@@ -36,6 +36,44 @@ export default class ItemPage extends React.Component {
                 pageSize: pageSize,
                 links: itemCollection.entity._links});
         });
+
+        follow(client, root, [
+            {rel: 'storage', params: {size: pageSize}}]
+        ).then(storageCollection => {
+            return client({
+                method: 'GET',
+                path: storageCollection.entity._links.profile.href,
+                headers: {'Accept': 'application/schema+json'}
+            }).then(schema => {
+                this.schema = schema.entity;
+                return storageCollection;
+            });
+        }).done(storageCollection => {
+            this.setState({
+                storage: storageCollection.entity._embedded.storage,
+                attributes: Object.keys(this.schema.properties),
+                pageSize: pageSize,
+                links: storageCollection.entity._links});
+        });
+
+        follow(client, root, [
+            {rel: 'organisations', params: {size: pageSize}}]
+        ).then(organisationsCollection => {
+            return client({
+                method: 'GET',
+                path: organisationsCollection.entity._links.profile.href,
+                headers: {'Accept': 'application/schema+json'}
+            }).then(schema => {
+                this.schema = schema.entity;
+                return organisationsCollection;
+            });
+        }).done(organisationsCollection => {
+            this.setState({
+                organisations: organisationsCollection.entity._embedded.organisations,
+                attributes: Object.keys(this.schema.properties),
+                pageSize: pageSize,
+                links: organisationsCollection.entity._links});
+        });
     }
 
     componentWillMount() {
@@ -47,7 +85,7 @@ export default class ItemPage extends React.Component {
     }
 
     render() {
-        if (this.state.links.self !== undefined) {
+        if (this.state.items !== undefined && this.state.storage !== undefined && this.state.organisations !== undefined) {
             return (
                 <div>
                     <h2>Items</h2>
@@ -56,7 +94,7 @@ export default class ItemPage extends React.Component {
                         <CreateItemDialog attributes={this.state.attributes} self={this.state.links.self.href}
                                           onCreateUpdate={this.onCreate}/>
                         <br/>
-                        <ItemList items={this.state.items}/>
+                        <ItemList items={this.state.items} storage={this.state.storage} organisations={this.state.organisations}/>
                     </div>
                 </div>);
         } else {

@@ -1,10 +1,10 @@
 import React from 'react';
-import Item from './ItemRow';
+import ItemRow from './ItemRow';
 
 export default class ItemList extends React.Component {
     render() {
         var items = this.props.items.map(item =>
-            <Item key={item._links.self.href} item={item}/>
+            <ItemRow key={item._links.self.href} item={item} storage={this.props.storage} organisations={this.props.organisations}/>
         );
         return (
             <table className="table table-striped table-bordered">
