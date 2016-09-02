@@ -25,4 +25,12 @@ public class Room {
 
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Building building;
+
+    /**
+     * This is used to return the ID in the JSON to the client which can be used to set the ID when the item is created.
+     * @return the ID of the room
+     */
+    public Long getRoomId() {
+        return id;
+    }
 }

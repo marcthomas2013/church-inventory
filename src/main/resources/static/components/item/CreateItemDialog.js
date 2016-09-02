@@ -59,12 +59,14 @@ export default class CreateItemDialog extends React.Component {
             "notes": this.state.notes,
             "value": this.state.value,
             "isAsset": (this.state.isAsset === "on"),
-            "reference": this.state.reference
+            "reference": this.state.reference,
+            "storageId": 1,
+            "organisationId": 2
         };
 
         client({
             method: 'POST',
-            path: this.props.self,
+            path: 'http://localhost:5000/api/createitem',
             entity: item,
             headers: {'Content-Type': 'application/json'}
         }).then(function(response) {

@@ -15,4 +15,6 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "storage", path = "storage")
 public interface StorageRepository extends PagingAndSortingRepository<Storage, Long> {
     List<Storage> findByName(@Param(value = "name") String name);
+
+    Storage findById(@Param(value = "id") Long id);
 }

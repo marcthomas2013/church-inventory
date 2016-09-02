@@ -28,4 +28,12 @@ public class Storage {
     private Room room;
 
     private String notes;
+
+    /**
+     * This is used to return the ID in the JSON to the client which can be used to set the ID when the item is created.
+     * @return the ID of the storage
+     */
+    public Long getStorageId() {
+        return id;
+    }
 }
