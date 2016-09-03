@@ -60,4 +60,8 @@ body {
     box-shadow: 1px 1px 3px #000;
 }
 
+.buttonPadding {
+    padding-left: 5px;
+}
+
 .close:hover { background: #00d9ff; }

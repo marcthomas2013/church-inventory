@@ -6,6 +6,8 @@ import EditableTextField from '../shared/EditableTextField';
 import EditableTextArea from '../shared/EditableTextArea';
 import EditableBooleanField from '../shared/EditableBooleanField';
 
+import RemoveItemDialog from './RemoveItemDialog';
+
 import client from '../../client';
 import createAlert from '../../alerts';
 
@@ -13,6 +15,7 @@ export default class ItemRow extends React.Component {
     constructor(props) {
         super(props);
         this.onEditHandler = this.onEditHandler.bind(this);
+        this.onDeleteHandler = this.onDeleteHandler.bind(this);
         this.onCancelHandler = this.onCancelHandler.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSuccessHandler = this.onSuccessHandler.bind(this);
@@ -42,6 +45,24 @@ export default class ItemRow extends React.Component {
 
     onEditHandler() {
         this.setState({readOnly: !this.state.readOnly});
+    }
+
+    onDeleteHandler(value) {
+        console.log("Deleting item: " + value);
+
+        client({
+            method: 'DELETE',
+            path: value,
+            headers: {'Content-Type': 'application/json'}
+        }).then(function(response) {
+            createAlert('<strong>Success</strong> - Changes have been saved successfuly', 'alert-success');
+
+            console.log('Success: ' + response);
+        }, function(response) {
+            createAlert('<strong>Oh snap!</strong> - Could not save the changes, please try again', 'alert-danger');
+
+            console.log('Failed: ' + response);
+        });
     }
 
     onChangeHandler(fieldValue, fieldName) {
@@ -93,7 +114,7 @@ export default class ItemRow extends React.Component {
         if (this.state.readOnly) {
             return (
                 <tr>
-                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span></td>
+                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.item._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
                     <td><EditableTextField value={this.state.originalName} field='Name' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextArea value={this.state.originalDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextArea value={this.state.originalNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
@@ -108,7 +129,7 @@ export default class ItemRow extends React.Component {
             return (
                 <tr className="success">
                     <td><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
-                        <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
+                        <span className="glyphicon glyphicon-ok buttonPadding" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
                     <td><EditableTextField value={this.state.newName} field='Name' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextArea value={this.state.newDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextArea value={this.state.newNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
