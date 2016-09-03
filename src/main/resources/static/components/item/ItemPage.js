@@ -92,7 +92,8 @@ export default class ItemPage extends React.Component {
 
                     <div>
                         <CreateItemDialog attributes={this.state.attributes} self={this.state.links.self.href}
-                                          onCreateUpdate={this.onCreate}/>
+                                          onCreateUpdate={this.onCreate} storage={this.state.storage}
+                                          organisations={this.state.organisations}/>
                         <br/>
                         <ItemList items={this.state.items} storage={this.state.storage} organisations={this.state.organisations}/>
                     </div>

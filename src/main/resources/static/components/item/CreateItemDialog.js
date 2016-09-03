@@ -3,6 +3,9 @@ import React from 'react';
 import client from '../../client';
 import createAlert from '../../alerts';
 
+import OrganisationControl from '../organisation/OrganisationControl';
+import StorageControl from '../storage/StorageControl';
+
 export default class CreateItemDialog extends React.Component {
 
     constructor(props) {
@@ -15,6 +18,8 @@ export default class CreateItemDialog extends React.Component {
         this.onChangeIsAssetHandler = this.onChangeIsAssetHandler.bind(this);
         this.onChangeValueHandler = this.onChangeValueHandler.bind(this);
         this.onChangeReferenceHandler = this.onChangeReferenceHandler.bind(this);
+        this.onStorageChangeHandler = this.onStorageChangeHandler.bind(this);
+        this.onOrganisationChangeHandler = this.onOrganisationChangeHandler.bind(this);
         this.state = {name: "", description: "", notes: "", isAsset: false, value: "", reference: ""};
     }
 
@@ -52,6 +57,16 @@ export default class CreateItemDialog extends React.Component {
         this.setState({"reference": e.target.value});
     }
 
+    onOrganisationChangeHandler(value) {
+        var values = value.split("/");
+        this.setState({"organisationId": values[values.length - 1]});
+    }
+
+    onStorageChangeHandler(value) {
+        var values = value.split("/");
+        this.setState({"storageId": values[values.length - 1]});
+    }
+
     onCreate() {
         var item = {
             "name": this.state.name,
@@ -60,8 +75,8 @@ export default class CreateItemDialog extends React.Component {
             "value": this.state.value,
             "isAsset": (this.state.isAsset === "on"),
             "reference": this.state.reference,
-            "storageId": 1,
-            "organisationId": 2
+            "storageId": this.state.storageId,
+            "organisationId": this.state.organisationId
         };
 
         client({
@@ -157,6 +172,20 @@ export default class CreateItemDialog extends React.Component {
                                                 className="form-control"
                                                 type="text"
                                                 placeholder="Please enter item asset reference" onChange={this.onChangeReferenceHandler}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="col-sm-2 control-label">Storage</label>
+                                        <div className="col-sm-10">
+                                            <StorageControl self={this.state.originalStorage} field='Storage' storage={this.props.storage} readOnly={false} onChangeHandler={this.onStorageChangeHandler}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="col-sm-2 control-label">Organisation</label>
+                                        <div className="col-sm-10">
+                                            <OrganisationControl self={this.state.originalOrganisation} field='Organisation' organisations={this.props.organisations} readOnly={false} onChangeHandler={this.onOrganisationChangeHandler}/>
                                         </div>
                                     </div>
                                 </form>
