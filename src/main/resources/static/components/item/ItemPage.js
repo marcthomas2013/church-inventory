@@ -80,8 +80,8 @@ export default class ItemPage extends React.Component {
         this.loadFromServer(this.state.pageSize);
     }
 
-    onCreate(newItem) {
-
+    onCreate() {
+        this.componentWillMount();
     }
 
     render() {
