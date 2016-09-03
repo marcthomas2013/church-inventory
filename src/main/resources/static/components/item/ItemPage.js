@@ -13,7 +13,7 @@ const root = '/api';
 export default class ItemPage extends React.Component {
     constructor(props) {
         super(props);
-        this.onCreate = this.onCreate.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
         this.state = {items: undefined, storage: undefined, organisations: undefined, attributes: [], pageSize: 100, links: {}};
     }
 
@@ -80,7 +80,7 @@ export default class ItemPage extends React.Component {
         this.loadFromServer(this.state.pageSize);
     }
 
-    onCreate() {
+    onUpdate() {
         this.componentWillMount();
     }
 
@@ -92,10 +92,10 @@ export default class ItemPage extends React.Component {
 
                     <div>
                         <CreateItemDialog attributes={this.state.attributes} self={this.state.links.self.href}
-                                          onCreateUpdate={this.onCreate} storage={this.state.storage}
+                                          onUpdate={this.onUpdate} storage={this.state.storage}
                                           organisations={this.state.organisations}/>
                         <br/>
-                        <ItemList items={this.state.items} storage={this.state.storage} organisations={this.state.organisations}/>
+                        <ItemList onUpdate={this.onUpdate} items={this.state.items} storage={this.state.storage} organisations={this.state.organisations}/>
                     </div>
                 </div>);
         } else {

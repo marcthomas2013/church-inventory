@@ -90,7 +90,7 @@ export default class CreateItemDialog extends React.Component {
             console.log('Success: ' + response);
 
             $('#createItem').modal('hide');
-            this.props.onCreateUpdate();
+            this.props.onUpdate();
         }.bind(this), function(response) {
             createAlert('<strong>Oh snap!</strong> - Could not save the changes, please try again', 'alert-danger');
 

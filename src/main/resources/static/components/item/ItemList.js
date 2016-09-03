@@ -4,7 +4,7 @@ import ItemRow from './ItemRow';
 export default class ItemList extends React.Component {
     render() {
         var items = this.props.items.map(item =>
-            <ItemRow key={item._links.self.href} item={item} storage={this.props.storage} organisations={this.props.organisations}/>
+            <ItemRow onUpdate={this.props.onUpdate} key={item._links.self.href} item={item} storage={this.props.storage} organisations={this.props.organisations}/>
         );
         return (
             <table className="table table-striped table-bordered">

@@ -58,7 +58,8 @@ export default class ItemRow extends React.Component {
             createAlert('<strong>Success</strong> - Item has been removed', 'alert-success');
 
             console.log('Success: ' + response);
-        }, function(response) {
+            this.props.onUpdate();
+        }.bind(this), function(response) {
             createAlert('<strong>Oh snap!</strong> - Could not remove item, please try again', 'alert-danger');
 
             console.log('Failed: ' + response);
