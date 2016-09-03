@@ -55,11 +55,11 @@ export default class ItemRow extends React.Component {
             path: value,
             headers: {'Content-Type': 'application/json'}
         }).then(function(response) {
-            createAlert('<strong>Success</strong> - Changes have been saved successfuly', 'alert-success');
+            createAlert('<strong>Success</strong> - Item has been removed', 'alert-success');
 
             console.log('Success: ' + response);
         }, function(response) {
-            createAlert('<strong>Oh snap!</strong> - Could not save the changes, please try again', 'alert-danger');
+            createAlert('<strong>Oh snap!</strong> - Could not remove item, please try again', 'alert-danger');
 
             console.log('Failed: ' + response);
         });
