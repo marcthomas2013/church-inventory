@@ -20,7 +20,7 @@ export default class CreateItemDialog extends React.Component {
         this.onChangeReferenceHandler = this.onChangeReferenceHandler.bind(this);
         this.onStorageChangeHandler = this.onStorageChangeHandler.bind(this);
         this.onOrganisationChangeHandler = this.onOrganisationChangeHandler.bind(this);
-        this.state = {name: "", description: "", notes: "", isAsset: false, value: "", reference: ""};
+        this.state = {name: "", description: "", notes: "", isAsset: false, value: "", reference: "", storageId: "1", organisationId: "1"};
     }
 
     showModal() {
