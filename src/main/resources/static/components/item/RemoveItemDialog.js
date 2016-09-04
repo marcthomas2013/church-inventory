@@ -4,25 +4,33 @@ export default class RemoveItemDialog extends React.Component {
 
     constructor(props) {
         super(props);
-
+        
+        this.showModal = this.showModal.bind(this);
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
     }
 
     showModal() {
-        $('#deleteItem').modal();
+        var values = this.props.value.split("/");
+        var id = "deleteItem" + values[values.length - 1];
+        $('#' + id).modal();
     }
     
     onDeleteHandler() {
         this.props.onDeleteHandler(this.props.value);
-        $('#deleteItem').modal('hide');
+        var values = this.props.value.split("/");
+        var id = "deleteItem" + values[values.length - 1];
+        $('#' + id).modal('hide');
     }
 
     render() {
+        var values = this.props.value.split("/");
+        var id = "deleteItem" + values[values.length - 1];
+
         return (
             <span>
                 <span className="glyphicon glyphicon-remove buttonPadding" aria-hidden="true" onClick={this.showModal}></span>
 
-                <div id="deleteItem" className="modal fade">
+                <div id={id} className="modal fade">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">

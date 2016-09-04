@@ -6,8 +6,6 @@ import follow from '../../follow'; // function to hop multiple links by "rel"
 import CreateItemDialog from './CreateItemDialog';
 import ItemList from './ItemList';
 
-import createAlert from '../../alerts';
-
 const root = '/api';
 
 export default class ItemPage extends React.Component {
