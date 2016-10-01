@@ -81,7 +81,7 @@ export default class CreateItemDialog extends React.Component {
 
         client({
             method: 'POST',
-            path: 'http://localhost:5000/api/createitem',
+            path: 'http://localhost:5000/api/createItem',
             entity: item,
             headers: {'Content-Type': 'application/json'}
         }).then(function(response) {

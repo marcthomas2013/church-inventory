@@ -19,13 +19,27 @@ public class ItemController {
     @Autowired
     private ItemCreationService itemCreationService;
 
-    @RequestMapping(value = "/api/createitem",  method = RequestMethod.POST)
+    @RequestMapping(value = "/api/createItem",  method = RequestMethod.POST)
     public ResponseEntity<String> createItem(@RequestBody SimpleItem simpleItem) {
         Item newItem = itemCreationService.createItemFromSimpleItem(simpleItem);
         ResponseEntity<String> response;
 
         if (newItem != null) {
             response = new ResponseEntity<>("{\"response\": \"success\"}", HttpStatus.CREATED);
+        } else {
+            response = new ResponseEntity<>("{\"response\": \"failed to create entity\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
+    }
+
+    @RequestMapping(value = "/api/updateItem", method = RequestMethod.PUT)
+    public ResponseEntity<String> updateItem(@RequestBody SimpleItem simpleItem) {
+        Item updatedItem = itemCreationService.updateItemFromSimpleItem(simpleItem);
+        ResponseEntity<String> response;
+
+        if (updatedItem != null) {
+            response = new ResponseEntity<>("{\"response\": \"success\"}", HttpStatus.OK);
         } else {
             response = new ResponseEntity<>("{\"response\": \"failed to create entity\"}", HttpStatus.INTERNAL_SERVER_ERROR);
         }

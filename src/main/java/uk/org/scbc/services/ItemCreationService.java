@@ -37,4 +37,20 @@ public class ItemCreationService {
 
         return item;
     }
+
+    public Item updateItemFromSimpleItem(SimpleItem simpleItem) {
+        Item item = itemRepository.findOne(Long.parseLong(simpleItem.getId()));
+
+        item.setName(simpleItem.getName());
+        item.setDescription(simpleItem.getDescription());
+        item.setNotes(simpleItem.getNotes());
+        item.setValue(simpleItem.getValue());
+        item.setIsAsset(simpleItem.getIsAsset());
+        item.setStorage(storageRepository.findById(simpleItem.getStorageId()));
+        item.setOrganisation(organisationRepository.findById(simpleItem.getOrganisationId()));
+
+        itemRepository.save(item);
+
+        return item;
+    }
 }

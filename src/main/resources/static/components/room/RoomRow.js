@@ -41,7 +41,7 @@ export default class Room extends React.Component {
             entity: newRoom,
             headers: {'Content-Type': 'application/json'}
         }).then(function(response) {
-            createAlert('<strong>Success</strong> - Changes have been saved successfuly', 'alert-success');
+            createAlert('<strong>Success</strong> - Changes have been saved successfully', 'alert-success');
 
             console.log('Success: ' + response);
         }, function(response) {

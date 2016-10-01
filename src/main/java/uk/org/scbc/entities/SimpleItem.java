@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SimpleItem {
+    private String id;
     private String name;
     private String description;
     private String notes;
