@@ -2,6 +2,7 @@ import React from 'react';
 import StorageControl from './StorageControl';
 import RoomControl from './../room/RoomControl';
 import BuildingControl from './../building/BuildingControl';
+import RemoveItemDialog from '../shared/RemoveItemDialog';
 
 import EditableTextField from '../shared/EditableTextField';
 
@@ -15,6 +16,7 @@ export default class Storage extends React.Component {
         this.onCancelHandler = this.onCancelHandler.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSuccessHandler = this.onSuccessHandler.bind(this);
+        this.onDeleteHandler = this.onDeleteHandler.bind(this);
         this.state = {originalValue: this.props.storage.name, newValue: this.props.storage.name, readOnly: true};
     }
 
@@ -52,6 +54,25 @@ export default class Storage extends React.Component {
         });
     }
 
+    onDeleteHandler(value) {
+        console.log("Deleting storage: " + value);
+
+        client({
+            method: 'DELETE',
+            path: value,
+            headers: {'Content-Type': 'application/json'}
+        }).then(function(response) {
+            createAlert('<strong>Success</strong> - Item has been removed', 'alert-success');
+
+            console.log('Success: ' + response);
+            this.props.onUpdate();
+        }.bind(this), function(response) {
+            createAlert('<strong>Oh snap!</strong> - Could not remove the storage. This will probably be because it is being used. Please move things from the storage before removing it.', 'alert-danger');
+
+            console.log('Failed: ' + response);
+        });
+    }
+
     render() {
         if (this.state.readOnly) {
             /*
@@ -72,7 +93,7 @@ export default class Storage extends React.Component {
              */
             return (
                 <tr>
-                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span></td>
+                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.storage._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
                     <td><EditableTextField value={this.state.originalValue} field='storage' readOnly={this.state.readOnly} /></td>
                     <td><RoomControl room={this.props.storage._links.room.href}/></td>
                     <td>{this.props.storage.building.name}</td>

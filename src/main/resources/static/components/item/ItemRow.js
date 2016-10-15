@@ -6,7 +6,7 @@ import EditableTextField from '../shared/EditableTextField';
 import EditableTextArea from '../shared/EditableTextArea';
 import EditableBooleanField from '../shared/EditableBooleanField';
 
-import RemoveItemDialog from './RemoveItemDialog';
+import RemoveItemDialog from '../shared/RemoveItemDialog';
 
 import client from '../../client';
 import createAlert from '../../alerts';

@@ -11,6 +11,7 @@ export default class StoragePage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
         this.state = {storage: [], attributes: [], pageSize: 100, links: {}};
     }
 
@@ -55,13 +56,17 @@ export default class StoragePage extends React.Component {
         });
     }
 
+    onUpdate() {
+        this.loadFromServer(this.state.pageSize);
+    }
+
     render() {
         return (
             <div>
                 <h2>Storage</h2>
 
                 <div>
-                    <StorageList storage={this.state.storage}/>
+                    <StorageList onUpdate={this.onUpdate} storage={this.state.storage}/>
                 </div>
             </div>)
     }
