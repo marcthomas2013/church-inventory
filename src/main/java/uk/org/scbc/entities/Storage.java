@@ -36,4 +36,13 @@ public class Storage {
     public Long getStorageId() {
         return id;
     }
+
+    /**
+     * This has been added to be able to display what the building is in the storage screen.
+     *
+     * @return building entity
+     */
+    public Building getBuilding() {
+        return room.getBuilding();
+    }
 }
