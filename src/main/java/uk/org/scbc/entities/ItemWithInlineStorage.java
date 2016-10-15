@@ -6,7 +6,7 @@ import org.springframework.data.rest.core.config.Projection;
  * Created by marc.thomas on 02/09/2016.
  */
 @Projection(name = "inlineStorage", types = { Item.class })
-public interface InlineStorage {
+public interface ItemWithInlineStorage {
     String getName();
     String getDescription();
     String getNotes();
