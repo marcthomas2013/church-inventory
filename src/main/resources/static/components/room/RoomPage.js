@@ -11,6 +11,7 @@ export default class RoomPage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
         this.state = {rooms: [], attributes: [], pageSize: 100, links: {}};
     }
 
@@ -55,13 +56,17 @@ export default class RoomPage extends React.Component {
         });
     }
 
+    onUpdate() {
+        this.loadFromServer(this.state.pageSize);
+    }
+
     render() {
         return (
             <div>
                 <h2>Rooms</h2>
 
                 <div>
-                    <RoomList rooms={this.state.rooms}/>
+                    <RoomList onUpdate={this.onUpdate} rooms={this.state.rooms}/>
                 </div>
             </div>)
     }

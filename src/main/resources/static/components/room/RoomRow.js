@@ -1,8 +1,9 @@
 import React from 'react';
-import RoomControl from './RoomControl';
 import BuildingControl from './../building/BuildingControl';
 
 import EditableTextField from '../shared/EditableTextField';
+
+import RemoveItemDialog from '../shared/RemoveItemDialog';
 
 import client from '../../client';
 import createAlert from '../../alerts';
@@ -14,6 +15,7 @@ export default class Room extends React.Component {
         this.onCancelHandler = this.onCancelHandler.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSuccessHandler = this.onSuccessHandler.bind(this);
+        this.onDeleteHandler = this.onDeleteHandler.bind(this);
         this.state = {originalValue: this.props.room.name, newValue: this.props.room.name, readOnly: true};
     }
 
@@ -51,11 +53,30 @@ export default class Room extends React.Component {
         });
     }
 
+    onDeleteHandler(value) {
+        console.log("Deleting room: " + value);
+
+        client({
+            method: 'DELETE',
+            path: value,
+            headers: {'Content-Type': 'application/json'}
+        }).then(function(response) {
+            createAlert('<strong>Success</strong> - Room has been removed', 'alert-success');
+
+            console.log('Success: ' + response);
+            this.props.onUpdate();
+        }.bind(this), function(response) {
+            createAlert('<strong>Oh snap!</strong> - Could not remove the room. This will probably be because it is being used. Please move things from the room before removing it.', 'alert-danger');
+
+            console.log('Failed: ' + response);
+        });
+    }
+
     render() {
         if (this.state.readOnly) {
             return (
                 <tr>
-                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span></td>
+                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.room._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
                     <td><EditableTextField value={this.state.originalValue} field='room' readOnly={this.state.readOnly} /></td>
                     <td><BuildingControl building={this.props.room._links.building.href}/></td>
                 </tr>

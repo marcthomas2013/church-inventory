@@ -1,5 +1,6 @@
 import React from 'react';
-import BuildingControl from './BuildingControl';
+
+import RemoveItemDialog from '../shared/RemoveItemDialog';
 
 import EditableTextField from '../shared/EditableTextField';
 
@@ -13,6 +14,7 @@ export default class Building extends React.Component {
         this.onCancelHandler = this.onCancelHandler.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSuccessHandler = this.onSuccessHandler.bind(this);
+        this.onDeleteHandler = this.onDeleteHandler.bind(this);
         this.state = {originalValue: this.props.building.name, newValue: this.props.building.name, readOnly: true};
     }
 
@@ -31,6 +33,25 @@ export default class Building extends React.Component {
     onSuccessHandler(e) {
         this.setState({originalValue: this.state.newValue, newValue: this.state.newValue, readOnly: true});
         this.onUpdate(this.props.building._links.self, {"name": this.state.newValue});
+    }
+
+    onDeleteHandler(value) {
+        console.log("Deleting building: " + value);
+
+        client({
+            method: 'DELETE',
+            path: value,
+            headers: {'Content-Type': 'application/json'}
+        }).then(function(response) {
+            createAlert('<strong>Success</strong> - Building has been removed', 'alert-success');
+
+            console.log('Success: ' + response);
+            this.props.onUpdate();
+        }.bind(this), function(response) {
+            createAlert('<strong>Oh snap!</strong> - Could not remove the building. This will probably be because it is being used. Please move things from the building before removing it.', 'alert-danger');
+
+            console.log('Failed: ' + response);
+        });
     }
 
     onUpdate(self, building) {
@@ -54,7 +75,7 @@ export default class Building extends React.Component {
         if (this.state.readOnly) {
             return (
                 <tr>
-                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span></td>
+                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.building._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
                     <td><EditableTextField value={this.state.originalValue} field='storage' readOnly={this.state.readOnly} /></td>
                 </tr>
             )

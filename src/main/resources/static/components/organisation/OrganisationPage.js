@@ -11,6 +11,7 @@ export default class OrganisationPage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
         this.state = {organisations: [], attributes: [], pageSize: 100, links: {}};
     }
 
@@ -55,13 +56,17 @@ export default class OrganisationPage extends React.Component {
         });
     }
 
+    onUpdate() {
+        this.loadFromServer(this.state.pageSize);
+    }
+
     render() {
         return (
             <div>
                 <h2>Organisations</h2>
 
                 <div>
-                    <OrganisationList organisations={this.state.organisations}/>
+                    <OrganisationList onUpdate={this.onUpdate} organisations={this.state.organisations}/>
                 </div>
             </div>)
     }

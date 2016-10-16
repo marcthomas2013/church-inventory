@@ -11,6 +11,7 @@ export default class BuildingPage extends React.Component {
     constructor(props) {
         super(props);
         this.onCreate = this.onCreate.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
         this.state = {buildings: [], attributes: [], pageSize: 100, links: {}};
     }
 
@@ -55,13 +56,17 @@ export default class BuildingPage extends React.Component {
         });
     }
 
+    onUpdate() {
+        this.loadFromServer(this.state.pageSize);
+    }
+    
     render() {
         return (
             <div>
                 <h2>Buildings</h2>
 
                 <div>
-                    <BuildingList buildings={this.state.buildings}/>
+                    <BuildingList onUpdate={this.onUpdate} buildings={this.state.buildings}/>
                 </div>
             </div>)
     }

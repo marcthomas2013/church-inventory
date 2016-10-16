@@ -1,7 +1,5 @@
 import React from 'react';
-import StorageControl from './StorageControl';
 import RoomControl from './../room/RoomControl';
-import BuildingControl from './../building/BuildingControl';
 import RemoveItemDialog from '../shared/RemoveItemDialog';
 
 import EditableTextField from '../shared/EditableTextField';
@@ -62,7 +60,7 @@ export default class Storage extends React.Component {
             path: value,
             headers: {'Content-Type': 'application/json'}
         }).then(function(response) {
-            createAlert('<strong>Success</strong> - Item has been removed', 'alert-success');
+            createAlert('<strong>Success</strong> - Storage has been removed', 'alert-success');
 
             console.log('Success: ' + response);
             this.props.onUpdate();
