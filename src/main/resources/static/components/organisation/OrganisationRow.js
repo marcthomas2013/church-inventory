@@ -75,15 +75,15 @@ export default class Organisation extends React.Component {
         if (this.state.readOnly) {
             return (
                 <tr>
-                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.organisation._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
+                    <td><span className="button-link glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.organisation._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
                     <td><EditableTextField value={this.state.originalValue} field='organisation' readOnly={this.state.readOnly} /></td>
                 </tr>
             )
         } else {
             return (
                 <tr className="success">
-                    <td><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
-                        <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
+                    <td><span className="button-link glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
+                        <span className="button-link glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
                     <td><EditableTextField value={this.state.newValue} field='organisation' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
                 </tr>
             )

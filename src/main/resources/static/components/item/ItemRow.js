@@ -180,7 +180,7 @@ export default class ItemRow extends React.Component {
         if (this.state.readOnly) {
             return (
                 <tr>
-                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.item._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
+                    <td><span className="button-link glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.item._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
                     <td><EditableTextField value={this.state.originalName} field='Name' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextArea value={this.state.originalDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextArea value={this.state.originalNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
@@ -194,8 +194,8 @@ export default class ItemRow extends React.Component {
         } else {
             return (
                 <tr className="success">
-                    <td><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
-                        <span className="glyphicon glyphicon-ok buttonPadding" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
+                    <td><span className="button-link glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
+                        <span className="button-link glyphicon glyphicon-ok buttonPadding" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
                     <td><EditableTextField value={this.state.newName} field='Name' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextArea value={this.state.newDescription} field='Description' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>
                     <td><EditableTextArea value={this.state.newNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler} /></td>

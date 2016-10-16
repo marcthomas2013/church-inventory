@@ -65,3 +65,5 @@ body {
 }
 
 .close:hover { background: #00d9ff; }
+
+span.button-link { cursor: pointer; }

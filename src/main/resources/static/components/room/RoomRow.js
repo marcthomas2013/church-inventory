@@ -76,7 +76,7 @@ export default class Room extends React.Component {
         if (this.state.readOnly) {
             return (
                 <tr>
-                    <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.room._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
+                    <td><span className="button-link glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.room._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
                     <td><EditableTextField value={this.state.originalValue} field='room' readOnly={this.state.readOnly} /></td>
                     <td><BuildingControl building={this.props.room._links.building.href}/></td>
                 </tr>
@@ -84,8 +84,8 @@ export default class Room extends React.Component {
         } else {
             return (
                 <tr className="success">
-                    <td><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
-                        <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
+                    <td><span className="button-link glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
+                        <span className="button-link glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
                     <td><EditableTextField value={this.state.newValue} field='room' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
                     <td><BuildingControl building={this.props.room._links.building.href}/></td>
                 </tr>

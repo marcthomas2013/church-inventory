@@ -28,7 +28,7 @@ export default class RemoveItemDialog extends React.Component {
 
         return (
             <span>
-                <span className="glyphicon glyphicon-remove buttonPadding" aria-hidden="true" onClick={this.showModal}></span>
+                <span className="button-link glyphicon glyphicon-remove buttonPadding" aria-hidden="true" onClick={this.showModal}></span>
 
                 <div id={id} className="modal fade">
                     <div className="modal-dialog">
