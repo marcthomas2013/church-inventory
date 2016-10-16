@@ -5,6 +5,8 @@ import follow from '../../follow'; // function to hop multiple links by "rel"
 
 import OrganisationList from './OrganisationList';
 
+import CreateOrganisationDialog from './CreateOrganisation';
+
 const root = '/api';
 
 export default class OrganisationPage extends React.Component {
@@ -40,6 +42,10 @@ export default class OrganisationPage extends React.Component {
         this.loadFromServer(this.state.pageSize);
     }
 
+    componentWillMount() {
+        this.loadFromServer(this.state.pageSize);
+    }
+
     onCreate(newOrganisation) {
         follow(client, root, ['items']).then(organistationCollection => {
             return client({
@@ -61,13 +67,23 @@ export default class OrganisationPage extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <h2>Organisations</h2>
-
+        if (this.state.links !== undefined && this.state.links.self !== undefined) {
+            return (
                 <div>
-                    <OrganisationList onUpdate={this.onUpdate} organisations={this.state.organisations}/>
-                </div>
-            </div>)
+                    <h2>Organisations</h2>
+
+                    <div>
+                        <CreateOrganisationDialog attributes={this.state.attributes} self={this.state.links.self.href}
+                                                  onUpdate={this.onUpdate} storage={this.state.storage}
+                                                  organisations={this.state.organisations}/>
+
+                        <br/>
+
+                        <OrganisationList onUpdate={this.onUpdate} organisations={this.state.organisations}/>
+                    </div>
+                </div>)
+        } else {
+            return (<div></div>)
+        }
     }
 }
