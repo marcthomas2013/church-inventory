@@ -4,6 +4,7 @@ import client from '../../client';
 import follow from '../../follow'; // function to hop multiple links by "rel"
 
 import BuildingList from './BuildingList';
+import CreateBuildingDialog from './CreateBuilding';
 
 const root = '/api';
 
@@ -40,6 +41,10 @@ export default class BuildingPage extends React.Component {
         this.loadFromServer(this.state.pageSize);
     }
 
+    componentWillMount() {
+        this.loadFromServer(this.state.pageSize);
+    }
+
     onCreate(newBuilding) {
         follow(client, root, ['buildings']).then(buildingCollection => {
             return client({
@@ -59,15 +64,25 @@ export default class BuildingPage extends React.Component {
     onUpdate() {
         this.loadFromServer(this.state.pageSize);
     }
-    
-    render() {
-        return (
-            <div>
-                <h2>Buildings</h2>
 
+    render() {
+        if (this.state.links !== undefined && this.state.links.self !== undefined) {
+            return (
                 <div>
-                    <BuildingList onUpdate={this.onUpdate} buildings={this.state.buildings}/>
-                </div>
-            </div>)
+                    <h2>Buildings</h2>
+
+                    <div>
+                        <CreateBuildingDialog attributes={this.state.attributes} self={this.state.links.self.href}
+                                                  onUpdate={this.onUpdate} storage={this.state.storage}
+                                                  buildings={this.state.organisations}/>
+
+                        <br/>
+
+                        <BuildingList onUpdate={this.onUpdate} buildings={this.state.buildings}/>
+                    </div>
+                </div>)
+        } else {
+            return (<div></div>)
+        }
     }
 }
