@@ -71,7 +71,7 @@ export default class CreateBuildingDialog extends React.Component {
                                             <input id="name"
                                                    className="form-control"
                                                    type="text"
-                                                   placeholder="Please enter an item name"
+                                                   placeholder="Please enter a building name"
                                                    onChange={this.onChangeNameHandler}/>
                                         </div>
                                     </div>
