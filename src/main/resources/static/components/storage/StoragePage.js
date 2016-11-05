@@ -1,9 +1,8 @@
-import React from 'react';
-
-import client from '../../client';
-import follow from '../../follow'; // function to hop multiple links by "rel"
-
-import StorageList from './StorageList';
+import React from "react";
+import client from "../../client";
+import follow from "../../follow";
+import StorageList from "./StorageList";
+import CreateStorageDialog from "./CreateStorage"; // function to hop multiple links by "rel"
 
 const root = '/api';
 
@@ -40,6 +39,10 @@ export default class StoragePage extends React.Component {
         this.loadFromServer(this.state.pageSize);
     }
 
+    componentWillMount() {
+        this.loadFromServer(this.state.pageSize);
+    }
+
     onCreate(newRoom) {
         follow(client, root, ['storage']).then(storageCollection => {
             return client({
@@ -61,13 +64,23 @@ export default class StoragePage extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <h2>Storage</h2>
-
+        if (this.state.links !== undefined && this.state.links.self !== undefined) {
+            return (
                 <div>
-                    <StorageList onUpdate={this.onUpdate} storage={this.state.storage}/>
-                </div>
-            </div>)
+                    <h2>Storage</h2>
+
+                    <div>
+                        <CreateStorageDialog attributes={this.state.attributes} self={this.state.links.self.href}
+                                          onUpdate={this.onUpdate} storage={this.state.storage}
+                                          rooms={this.state.organisations}/>
+
+                        <br/>
+
+                        <StorageList onUpdate={this.onUpdate} storage={this.state.storage}/>
+                    </div>
+                </div>)
+        } else {
+            return (<div></div>)
+        }
     }
 }

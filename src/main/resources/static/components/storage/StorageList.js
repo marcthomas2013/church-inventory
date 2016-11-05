@@ -12,6 +12,8 @@ export default class StorageList extends React.Component {
                 <tr>
                     <th></th>
                     <th>Storage Names</th>
+                    <th>Main Contents</th>
+                    <th>Notes</th>
                     <th>Room Names</th>
                     <th>Building Names</th>
                 </tr>

@@ -15,11 +15,16 @@ export default class Storage extends React.Component {
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSuccessHandler = this.onSuccessHandler.bind(this);
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
-        this.state = {originalValue: this.props.storage.name, newValue: this.props.storage.name, readOnly: true};
+        this.state = {originalName: this.props.storage.name, newName: this.props.storage.name,
+            originalMainContents: this.props.storage.mainContents, newMainContents: this.props.storage.mainContents,
+            originalNotes: this.props.storage.notes, newNotes: this.props.storage.notes,
+            readOnly: true};
     }
 
     onCancelHandler() {
-        this.setState({readOnly: !this.state.readOnly, newValue: this.state.originalValue});
+        this.setState({readOnly: !this.state.readOnly, newName: this.state.originalName,
+            newMainContents: this.state.originalMainContents,
+            newNotes: this.state.originalNotes});
     }
 
     onEditHandler() {
@@ -27,12 +32,19 @@ export default class Storage extends React.Component {
     }
 
     onChangeHandler(fieldValue, fieldName) {
-        this.setState({newValue: fieldValue});
+        var stateObject = {};
+        fieldName = "new" + fieldName;
+        stateObject[fieldName] = fieldValue;
+        this.setState(stateObject);
     }
 
     onSuccessHandler(e) {
-        this.setState({originalValue: this.state.newValue, newValue: this.state.newValue, readOnly: true});
-        this.onUpdate(this.props.storage._links.self, {"name": this.state.newValue});
+        this.setState({originalName: this.state.newName, newName: this.state.newName,
+            originalMainContents: this.state.newMainContents, newMainContents: this.state.newMainContents,
+            originalNotes: this.state.newNotes, newNotes: this.state.newNotes, readOnly: true});
+        this.onUpdate(this.props.storage._links.self, {"name": this.state.newName,
+        "mainContents": this.state.newMainContents,
+        "notes": this.state.newNotes});
     }
 
     onUpdate(self, storage) {
@@ -76,7 +88,7 @@ export default class Storage extends React.Component {
             /*
              <tr>
              <td><span className="glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span></td>
-             <td><EditableTextField value={this.state.originalValue} field='storage' readOnly={this.state.readOnly} /></td>
+             <td><EditableTextField value={this.state.originalName} field='storage' readOnly={this.state.readOnly} /></td>
              <td><RoomControl room={this.props.storage._links.room.href}/></td>
              <td><BuildingControl building={this.props.storage._links.building.href}/></td>
              </tr>
@@ -84,7 +96,7 @@ export default class Storage extends React.Component {
              <tr className="success">
              <td><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
              <span className="glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
-             <td><EditableTextField value={this.state.newValue} field='storage' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
+             <td><EditableTextField value={this.state.newName} field='storage' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
              <td><RoomControl room={this.props.storage._links.room.href}/></td>
              <td><BuildingControl building={this.props.storage._links.building.href}/></td>
              </tr>
@@ -92,7 +104,9 @@ export default class Storage extends React.Component {
             return (
                 <tr>
                     <td><span className="button-link glyphicon glyphicon-pencil" aria-hidden="true" onClick={this.onEditHandler}></span><RemoveItemDialog value={this.props.storage._links.self.href} onDeleteHandler={this.onDeleteHandler}/></td>
-                    <td><EditableTextField value={this.state.originalValue} field='storage' readOnly={this.state.readOnly} /></td>
+                    <td><EditableTextField value={this.state.originalName} field='Name' readOnly={this.state.readOnly} /></td>
+                    <td><EditableTextField value={this.state.originalMainContents} field='MainContents' readOnly={this.state.readOnly} /></td>
+                    <td><EditableTextField value={this.state.originalNotes} field='Notes' readOnly={this.state.readOnly} /></td>
                     <td><RoomControl room={this.props.storage._links.room.href}/></td>
                     <td>{this.props.storage.building.name}</td>
                 </tr>
@@ -102,7 +116,9 @@ export default class Storage extends React.Component {
                 <tr className="success">
                     <td><span className="button-link glyphicon glyphicon-remove" aria-hidden="true" onClick={this.onCancelHandler}></span>
                         <span className="button-link glyphicon glyphicon-ok" aria-hidden="true" onClick={this.onSuccessHandler}></span></td>
-                    <td><EditableTextField value={this.state.newValue} field='storage' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
+                    <td><EditableTextField value={this.state.newName} field='Name' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
+                    <td><EditableTextField value={this.state.newMainContents} field='MainContents' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
+                    <td><EditableTextField value={this.state.newNotes} field='Notes' readOnly={this.state.readOnly} onChangeHandler={this.onChangeHandler}/></td>
                     <td><RoomControl room={this.props.storage._links.room.href}/></td>
                     <td>{this.props.storage.building.name}</td>
                 </tr>
