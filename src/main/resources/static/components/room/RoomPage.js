@@ -1,9 +1,8 @@
-import React from 'react';
-
-import client from '../../client';
-import follow from '../../follow'; // function to hop multiple links by "rel"
-
-import RoomList from './RoomList';
+import React from "react";
+import client from "../../client";
+import follow from "../../follow";
+import RoomList from "./RoomList";
+import CreateRoomDialog from "./CreateRoom"; // function to hop multiple links by "rel"
 
 const root = '/api';
 
@@ -40,6 +39,10 @@ export default class RoomPage extends React.Component {
         this.loadFromServer(this.state.pageSize);
     }
 
+    componentWillMount() {
+        this.loadFromServer(this.state.pageSize);
+    }
+
     onCreate(newRoom) {
         follow(client, root, ['rooms']).then(roomsCollection => {
             return client({
@@ -61,13 +64,23 @@ export default class RoomPage extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <h2>Rooms</h2>
-
+        if (this.state.links !== undefined && this.state.links.self !== undefined) {
+            return (
                 <div>
-                    <RoomList onUpdate={this.onUpdate} rooms={this.state.rooms}/>
-                </div>
-            </div>)
+                    <h2>Rooms</h2>
+
+                    <div>
+                        <CreateRoomDialog attributes={this.state.attributes} self={this.state.links.self.href}
+                                              onUpdate={this.onUpdate} storage={this.state.storage}
+                                              rooms={this.state.organisations}/>
+
+                        <br/>
+
+                        <RoomList onUpdate={this.onUpdate} rooms={this.state.rooms}/>
+                    </div>
+                </div>)
+        } else {
+            return (<div></div>)
+        }
     }
 }
