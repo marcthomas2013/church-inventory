@@ -83,7 +83,7 @@ export default class StoragePage extends React.Component {
     }
 
     render() {
-        if (this.state.links !== undefined && this.state.links.self !== undefined) {
+        if (this.state.links !== undefined && this.state.links.self !== undefined && this.state.rooms !== undefined) {
             return (
                 <div>
                     <h2>Storage</h2>
@@ -91,11 +91,11 @@ export default class StoragePage extends React.Component {
                     <div>
                         <CreateStorageDialog attributes={this.state.attributes} self={this.state.links.self.href}
                                           onUpdate={this.onUpdate} storage={this.state.storage}
-                                          rooms={this.state.organisations}/>
+                                          rooms={this.state.rooms}/>
 
                         <br/>
 
-                        <StorageList onUpdate={this.onUpdate} storage={this.state.storage}/>
+                        <StorageList onUpdate={this.onUpdate} storage={this.state.storage} rooms={this.state.rooms}/>
                     </div>
                 </div>)
         } else {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import uk.org.scbc.entities.SimpleStorage;
 import uk.org.scbc.entities.Storage;
 import uk.org.scbc.services.StorageCreationService;
 
@@ -29,6 +30,20 @@ public class StorageController {
 
         if (newStorage != null) {
             response = new ResponseEntity<>("{\"response\": \"success\"}", HttpStatus.CREATED);
+        } else {
+            response = new ResponseEntity<>("{\"response\": \"failed to create entity\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
+    }
+
+    @RequestMapping(value = "/api/updateStorage", method = RequestMethod.PUT)
+    public ResponseEntity<String> updateItem(@RequestBody SimpleStorage simpleStorage) {
+        Storage updatedRoom = storageCreationService.updateStorageFromSimpleStorage(simpleStorage);
+        ResponseEntity<String> response;
+
+        if (updatedRoom != null) {
+            response = new ResponseEntity<>("{\"response\": \"success\"}", HttpStatus.OK);
         } else {
             response = new ResponseEntity<>("{\"response\": \"failed to create entity\"}", HttpStatus.INTERNAL_SERVER_ERROR);
         }

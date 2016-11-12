@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.org.scbc.dao.RoomRepository;
 import uk.org.scbc.dao.StorageRepository;
+import uk.org.scbc.entities.SimpleStorage;
 import uk.org.scbc.entities.Storage;
 
 /**
@@ -29,5 +30,16 @@ public class StorageCreationService {
         storageRepository.save(newStorage);
 
         return newStorage;
+    }
+
+    public Storage updateStorageFromSimpleStorage(SimpleStorage simpleStorage) {
+        Storage storage = storageRepository.findOne(Long.parseLong(simpleStorage.getId()));
+
+        storage.setName(simpleStorage.getName());
+        storage.setRoom(roomRepository.findById(simpleStorage.getRoomId()));
+
+        storageRepository.save(storage);
+
+        return storage;
     }
 }
