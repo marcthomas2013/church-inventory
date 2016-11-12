@@ -11,7 +11,7 @@ export default class BuildingList extends React.Component {
                 <tbody>
                 <tr>
                     <th></th>
-                    <th>Building Names</th>
+                    <th>Building Name</th>
                 </tr>
                 {buildings}
                 </tbody>

@@ -11,11 +11,11 @@ export default class StorageList extends React.Component {
                 <tbody>
                 <tr>
                     <th></th>
-                    <th>Storage Names</th>
+                    <th>Storage Name</th>
                     <th>Main Contents</th>
                     <th>Notes</th>
-                    <th>Room Names</th>
-                    <th>Building Names</th>
+                    <th>Room Name</th>
+                    <th>Building Name</th>
                 </tr>
                 {storage}
                 </tbody>

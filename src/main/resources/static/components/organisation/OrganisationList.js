@@ -11,7 +11,7 @@ export default class OrganisationList extends React.Component {
                 <tbody>
                 <tr>
                     <th></th>
-                    <th>Organisation Names</th>
+                    <th>Organisation Name</th>
                 </tr>
                 {organisations}
                 </tbody>
