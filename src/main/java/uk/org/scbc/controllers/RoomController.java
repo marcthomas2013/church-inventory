@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import uk.org.scbc.entities.Room;
+import uk.org.scbc.entities.SimpleRoom;
 import uk.org.scbc.services.RoomCreationService;
 
 /**
@@ -29,6 +30,21 @@ public class RoomController {
 
         if (newRoom != null) {
             response = new ResponseEntity<>("{\"response\": \"success\"}", HttpStatus.CREATED);
+        } else {
+            response = new ResponseEntity<>("{\"response\": \"failed to create entity\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return response;
+    }
+
+
+    @RequestMapping(value = "/api/updateRoom", method = RequestMethod.PUT)
+    public ResponseEntity<String> updateItem(@RequestBody SimpleRoom simpleRoom) {
+        Room updatedRoom = roomCreationService.updateRoomFromSimpleRoom(simpleRoom);
+        ResponseEntity<String> response;
+
+        if (updatedRoom != null) {
+            response = new ResponseEntity<>("{\"response\": \"success\"}", HttpStatus.OK);
         } else {
             response = new ResponseEntity<>("{\"response\": \"failed to create entity\"}", HttpStatus.INTERNAL_SERVER_ERROR);
         }

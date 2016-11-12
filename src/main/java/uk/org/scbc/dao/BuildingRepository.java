@@ -14,5 +14,7 @@ import java.util.List;
  */
 @RepositoryRestResource(collectionResourceRel = "buildings", path = "buildings")
 public interface BuildingRepository extends PagingAndSortingRepository<Building, Long> {
+    Building findById(@Param(value = "id") Long id);
+
     List<Building> findByName(@Param(value = "name") String name);
 }
