@@ -33,6 +33,25 @@ export default class StoragePage extends React.Component {
                 pageSize: pageSize,
                 links: storageCollection.entity._links});
         });
+
+        follow(client, root, [
+            {rel: 'rooms', params: {size: pageSize}}]
+        ).then(roomsCollection => {
+            return client({
+                method: 'GET',
+                path: roomsCollection.entity._links.profile.href,
+                headers: {'Accept': 'application/schema+json'}
+            }).then(schema => {
+                this.schema = schema.entity;
+        return roomsCollection;
+    });
+    }).done(roomsCollection => {
+            this.setState({
+            rooms: roomsCollection.entity._embedded.rooms,
+            attributes: Object.keys(this.schema.properties),
+            pageSize: pageSize,
+            links: roomsCollection.entity._links});
+    });
     }
 
     componentDidMount() {
