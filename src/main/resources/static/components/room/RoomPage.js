@@ -76,6 +76,25 @@ export default class RoomPage extends React.Component {
         }).done(response => {
             this.onNavigate(response.entity._links.last.href);
         });
+
+        follow(client, root, [
+            {rel: 'building', params: {size: pageSize}}]
+        ).then(buildingCollection => {
+            return client({
+                method: 'GET',
+                path: buildingCollection.entity._links.profile.href,
+                headers: {'Accept': 'application/schema+json'}
+            }).then(schema => {
+                this.schema = schema.entity;
+                return buildingCollection;
+            });
+        }).done(buildingCollection => {
+            this.setState({
+                buildings: buildingCollection.entity._embedded.buildings,
+                attributes: Object.keys(this.schema.properties),
+                pageSize: pageSize,
+                links: roomsCollection.entity._links});
+        });
     }
 
     onUpdate() {
@@ -83,14 +102,14 @@ export default class RoomPage extends React.Component {
     }
 
     render() {
-        if (this.state.links !== undefined && this.state.links.self !== undefined) {
+        if (this.state.links !== undefined && this.state.links.self !== undefined && this.state.rooms !== undefined) {
             return (
                 <div>
                     <h2>Rooms</h2>
 
                     <div>
                         <CreateRoomDialog attributes={this.state.attributes} self={this.state.links.self.href}
-                                              onUpdate={this.onUpdate}/>
+                                              onUpdate={this.onUpdate} rooms={this.state.rooms} buildings={this.state.buildings}/>
 
                         <br/>
 

@@ -4,6 +4,7 @@
 import React from "react";
 import client from "../../client";
 import createAlert from "../../alerts";
+import BuildingControl from './../building/BuildingControl';
 
 export default class CreateRoomDialog extends React.Component {
 
@@ -12,7 +13,8 @@ export default class CreateRoomDialog extends React.Component {
 
         this.onCreate = this.onCreate.bind(this);
         this.onChangeNameHandler = this.onChangeNameHandler.bind(this);
-        this.state = {name: ""};
+        this.onBuildingChangeHandler = this.onBuildingChangeHandler.bind(this);
+        this.state = {name: "", newBuildingId: "1"};
     }
 
     showModal() {
@@ -24,9 +26,20 @@ export default class CreateRoomDialog extends React.Component {
         this.setState({"name": e.target.value});
     }
 
+    onBuildingChangeHandler(fieldValue, fieldName) {
+        var stateObject = {};
+        fieldName = "new" + fieldName;
+        stateObject[fieldName] = fieldValue;
+        this.setState(stateObject);
+
+        var values = fieldValue.split("/");
+        this.setState({"newBuildingId": values[values.length - 1]});
+    }
+
     onCreate() {
         var item = {
-            "name": this.state.name
+            "name": this.state.name,
+            "buildingId": this.state.newBuildingId
         };
 
         client({
@@ -72,6 +85,13 @@ export default class CreateRoomDialog extends React.Component {
                                                    type="text"
                                                    placeholder="Please enter a room name"
                                                    onChange={this.onChangeNameHandler}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="col-sm-2 control-label">Building</label>
+                                        <div className="col-sm-10">
+                                            <BuildingControl self={this.state.newBuilding} readOnly={this.state.readOnly} field='Building' buildings={this.props.buildings} onChangeHandler={this.onBuildingChangeHandler}/>
                                         </div>
                                     </div>
                                 </form>

@@ -42,19 +42,23 @@ export default class RoomControl extends React.Component {
                 </div>
             )
         } else {
-            var options = this.state.rooms.map(room => {
-                return (<option key={room._links.self.href} value={room._links.self.href}>{room.name}</option>);
-            });
+            if (this.state.rooms !== undefined) {
+                var options = this.state.rooms.map(room => {
+                    return (<option key={room._links.self.href} value={room._links.self.href}>{room.name}</option>);
+                });
 
-            return (
-                <div>
-                    <select value={this.state.roomLink}
-                            className="form-control"
-                            onChange={this.onChangeHandler}>
-                        {options}
-                    </select>
-                </div>
-            )
+                return (
+                    <div>
+                        <select value={this.state.roomLink}
+                                className="form-control"
+                                onChange={this.onChangeHandler}>
+                            {options}
+                        </select>
+                    </div>
+                )
+            } else {
+                return (<div></div>)
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ public class RoomController {
     private RoomCreationService roomCreationService;
 
     @RequestMapping(value = "/api/createRoom",  method = RequestMethod.POST)
-    public ResponseEntity<String> createItem(@RequestBody Room room) {
+    public ResponseEntity<String> createItem(@RequestBody SimpleRoom room) {
         Room newRoom = roomCreationService.createRoom(room);
         ResponseEntity<String> response;
 

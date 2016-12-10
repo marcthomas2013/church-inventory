@@ -18,10 +18,11 @@ public class RoomCreationService {
     @Autowired
     private BuildingRepository buildingRepository;
 
-    public Room createRoom(Room room) {
+    public Room createRoom(SimpleRoom room) {
         Room newRoom = new Room();
 
         newRoom.setName(room.getName());
+        newRoom.setBuilding(buildingRepository.findById(room.getBuildingId()));
 
         roomRepository.save(newRoom);
 
