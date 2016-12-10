@@ -18,14 +18,13 @@ public class StorageCreationService {
     @Autowired
     private RoomRepository roomRepository;
 
-    public Storage createStorage(Storage storage) {
+    public Storage createStorage(SimpleStorage storage) {
         Storage newStorage = new Storage();
 
         newStorage.setName(storage.getName());
         newStorage.setMainContents(storage.getMainContents());
         newStorage.setNotes(storage.getNotes());
-        // TODO we need to set the correct room based on the selection
-        newStorage.setRoom(roomRepository.findOne(1L));
+        newStorage.setRoom(roomRepository.findOne(storage.getRoomId()));
 
         storageRepository.save(newStorage);
 

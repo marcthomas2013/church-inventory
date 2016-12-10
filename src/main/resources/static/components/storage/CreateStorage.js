@@ -4,6 +4,7 @@
 import React from "react";
 import client from "../../client";
 import createAlert from "../../alerts";
+import RoomControl from './../room/RoomControl';
 
 export default class CreateStorageDialog extends React.Component {
 
@@ -14,7 +15,8 @@ export default class CreateStorageDialog extends React.Component {
         this.onChangeNameHandler = this.onChangeNameHandler.bind(this);
         this.onChangeStorageContentsHandler = this.onChangeStorageContentsHandler.bind(this);
         this.onChangeNotesHandler = this.onChangeNotesHandler.bind(this);
-        this.state = {name: "", mainContents: "", notes: ""};
+        this.onRoomChangeHandler = this.onRoomChangeHandler.bind(this);
+        this.state = {name: "", mainContents: "", notes: "", newRoomId: "1"};
     }
 
     showModal() {
@@ -36,11 +38,22 @@ export default class CreateStorageDialog extends React.Component {
         this.setState({"notes": e.target.value});
     }
 
+    onRoomChangeHandler(fieldValue, fieldName) {
+        var stateObject = {};
+        fieldName = "new" + fieldName;
+        stateObject[fieldName] = fieldValue;
+        this.setState(stateObject);
+
+        var values = fieldValue.split("/");
+        this.setState({"newRoomId": values[values.length - 1]});
+    }
+
     onCreate() {
         var item = {
             "name": this.state.name,
             "mainContents": this.state.mainContents,
-            "notes": this.state.notes
+            "notes": this.state.notes,
+            "roomId": this.state.newRoomId
         };
 
         client({
@@ -55,6 +68,7 @@ export default class CreateStorageDialog extends React.Component {
 
             $('#createStorage').modal('hide');
             this.props.onUpdate();
+            this.state = {name: "", mainContents: "", notes: ""};
         }.bind(this), function(response) {
             createAlert('<strong>Oh snap!</strong> - Could not create the storage, please try again', 'alert-danger');
 
@@ -109,6 +123,13 @@ export default class CreateStorageDialog extends React.Component {
                                                    rows="3"
                                                    placeholder="Please enter any notes"
                                                    onChange={this.onChangeNotesHandler}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="col-sm-2 control-label">Room</label>
+                                        <div className="col-sm-10">
+                                            <RoomControl self={this.state.newRoom} readOnly={this.state.readOnly} field='Room' rooms={this.props.rooms} onChangeHandler={this.onRoomChangeHandler}/>
                                         </div>
                                     </div>
                                 </form>

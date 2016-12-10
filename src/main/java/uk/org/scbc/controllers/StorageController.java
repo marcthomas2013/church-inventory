@@ -24,7 +24,7 @@ public class StorageController {
     private StorageCreationService storageCreationService;
 
     @RequestMapping(value = "/api/createStorage",  method = RequestMethod.POST)
-    public ResponseEntity<String> createStorage(@RequestBody Storage storage) {
+    public ResponseEntity<String> createStorage(@RequestBody SimpleStorage storage) {
         Storage newStorage = storageCreationService.createStorage(storage);
         ResponseEntity<String> response;
 
